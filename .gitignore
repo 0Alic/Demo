@@ -34,3 +34,7 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+# GithubPlugin
+/Assets/Plugins/GitHub
+/Assets/Plugins/GitHub.meta
