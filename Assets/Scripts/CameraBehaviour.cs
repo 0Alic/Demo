@@ -13,6 +13,7 @@ public class CameraBehaviour : MonoBehaviour {
 	private float pitch = 0.0f;
 
 	private float yPos;
+	bool hasCollided;
 
 	void Start(){
 	
@@ -24,30 +25,31 @@ public class CameraBehaviour : MonoBehaviour {
 		yaw += speedH * Input.GetAxis("Mouse X");
 		pitch -= speedV * Input.GetAxis("Mouse Y");
 
-		transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
+		// Avoid 360.
+		if(pitch > 85)			pitch = 85;
+		else if(pitch < -85) 	pitch = -85;
 
+		transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
+		
 		// Move
-		Vector3 mov = new Vector3(transform.position.x,yPos,transform.position.z);
+		Vector3 position = transform.position;
 
 		if (Input.GetKey ("w"))
-//			transform.position += transform.forward*Time.deltaTime*speed;
-			mov.z = transform.position.z + Time.deltaTime*speed;
+			position += transform.forward * Time.deltaTime*speed;
 		else if (Input.GetKey ("s"))
-			mov.z = transform.position.z - Time.deltaTime*speed;
+			position -= transform.forward * Time.deltaTime*speed;
 
 		if (Input.GetKey ("a"))
-			mov.x = transform.position.x +Time.deltaTime*speed;
+			position -= transform.right * Time.deltaTime*speed;
 		else if (Input.GetKey ("d"))
-			mov.x = transform.position.x - Time.deltaTime*speed;
+			position += transform.right * Time.deltaTime*speed;
 
-		mov.y = yPos;
-		transform.position = mov;
-
+		position.y = yPos;
+		transform.position = position;
 	}
 
-	void OnCollisionEnter(Collision collision){
-	
-		GetComponent<Rigidbody> ().velocity = new Vector3(00,0,0);
+	void OnCollisionExit(Collision collision){
+		GetComponent<Rigidbody> ().velocity = new Vector3(0,0,0);
 	}
 
 
