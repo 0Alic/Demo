@@ -38,3 +38,6 @@ sysinfo.txt
 # GithubPlugin
 /Assets/Plugins/GitHub
 /Assets/Plugins/GitHub.meta
+
+# VS Code
+/.vscode
