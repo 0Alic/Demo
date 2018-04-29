@@ -7,6 +7,7 @@ using UnityEngine;
 */
 public class Creator : MonoBehaviour {
 
+	public enum ID {TAVOLO=0};
 	public GameObject[] prefabs;
 
 

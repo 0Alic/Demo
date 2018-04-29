@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UserController : MonoBehaviour {
+
+	public Text stateText;
 
 	GameObject objToPlace = null;
 	bool toChooseObj = true;
@@ -20,6 +23,7 @@ public class UserController : MonoBehaviour {
 
 				toChooseObj = false;
 				toPlaceObj = true;
+				stateText.text = "Stato: Posiziona";
 			}
 		}
 
@@ -37,6 +41,7 @@ public class UserController : MonoBehaviour {
 
 				toChooseObj = true;
 				toPlaceObj = false;
+				stateText.text = "Stato: Scegli";
 			}
 		}
 	}
@@ -51,7 +56,16 @@ public class UserController : MonoBehaviour {
 
 			return true;
 		}
-			
+
+		else if(Input.GetKeyDown ("2")){
+
+			newObject = Instantiate(Resources.Load("Prefabs/Lampada", typeof(GameObject)),
+				new Vector3(0, 5, 0), Quaternion.identity) as GameObject;
+
+			return true;
+		}
+
+
 		newObject = null;
 		return false;
 	}
