@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 33490745846673914}
   - component: {fileID: 136736205427251010}
   - component: {fileID: 23245006484157738}
+  - component: {fileID: 114455116577870414}
   m_Layer: 0
   m_Name: Lampada
   m_TagString: Untagged
@@ -149,6 +150,17 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114455116577870414
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1978742219784522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 508e7fc6ce222fd44927dcd1b6c911c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &136736205427251010
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -1002,6 +1002,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65f9a207d3938704698d4bd0f81bd302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  placedistance: 15
   stateText: {fileID: 1815201499}
 --- !u!1 &917607108
 GameObject:
