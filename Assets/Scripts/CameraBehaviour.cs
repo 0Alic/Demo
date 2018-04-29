@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+	Script to attach to the Main Camera
+	Handles:
+		- Rotation with the mouse
+		- Movement with WASD
+*/
 public class CameraBehaviour : MonoBehaviour {
 
 	public float speed = 1.0f;
