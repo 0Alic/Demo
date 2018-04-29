@@ -34,6 +34,7 @@ public class UserController : MonoBehaviour {
 
 				// Update status
 				toChooseObj = false;
+				objToPlace.GetComponent<Collider> ().enabled = false; // Disable it because it would interefere with the raycast later on
 				toPlaceObj = true;
 				stateText.text = "Stato: Posiziona";
 			}
@@ -42,42 +43,36 @@ public class UserController : MonoBehaviour {
 		if (toPlaceObj) {
 			// If I have chosen an obj and I need to place it
 
-			float height = objToPlace.GetComponent<Renderer> ().bounds.size.y / 2;
+			Vector3 size = objToPlace.GetComponent<Renderer> ().bounds.size;
+			size = Vector3.Scale (size, new Vector3(0.5f, 0.5f, 0.5f));
 
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
 
 			if (Physics.Raycast (ray, out hit)) {
 
-				if (hit.transform.tag == "Wall") {
-					// If I am hitting a wall (object with Wall tag)
+				if (hit.transform.tag == "Room") {
+					// If I am hitting the room (object with Room tag)
 
-					/*
-						
-						OK, l'oggetto si appiccica al muro, ma ovviamente il PIVOT è nel centro, quindi
-						per metà sparisce nel muro
+					objToPlace.transform.position = hit.point;
 
-					*/
+					// Vector3.Scale() == element wise product
+					objToPlace.transform.position += Vector3.Scale (size, hit.normal);
 
-					//				Vector3 rayPt = ray.GetPoint (placedistance);
-					Vector3 rayPt = hit.point;
-
-					//				Vector3 pos = new Vector3 (rayPt.x, height, rayPt.z);
-
-					objToPlace.transform.position = rayPt;
-
+					
 				}
-
 			}
 
 			if(Input.GetButtonDown("Fire1")){
 				// Left mouse button
 
 				toChooseObj = true;
+				objToPlace.GetComponent<Collider> ().enabled = true;
 				toPlaceObj = false;
 				stateText.text = "Stato: Scegli";
 			}
 		}
+
 	}
 
 
