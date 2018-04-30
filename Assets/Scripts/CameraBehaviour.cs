@@ -21,9 +21,12 @@ public class CameraBehaviour : MonoBehaviour {
 	private float yPos;
 	bool hasCollided;
 
+	private Rigidbody rb;
+
 	void Start(){
 	
 		yPos = transform.position.y;
+		rb = GetComponent<Rigidbody> ();
 	}
 
 	void Update () {
@@ -55,8 +58,7 @@ public class CameraBehaviour : MonoBehaviour {
 	}
 
 	void OnCollisionExit(Collision collision){
-		GetComponent<Rigidbody> ().velocity = new Vector3(0,0,0);
+		rb.velocity = new Vector3(0,0,0);
 	}
-
 
 }
