@@ -29,7 +29,7 @@ public class CameraBehaviour : MonoBehaviour {
 		rb = GetComponent<Rigidbody> ();
 	}
 
-	void Update () {
+	void FixedUpdate () {
 		// Rotate
 		yaw += speedH * Input.GetAxis("Mouse X");
 		pitch -= speedV * Input.GetAxis("Mouse Y");
