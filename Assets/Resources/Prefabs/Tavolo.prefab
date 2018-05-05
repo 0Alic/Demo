@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 65131586829873838}
   - component: {fileID: 23509990024513888}
   - component: {fileID: 114587877375137388}
+  - component: {fileID: 114121164961704176}
   m_Layer: 0
   m_Name: Tavolo
   m_TagString: Untagged
@@ -56,6 +57,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 45c905449c0c0084a92e426b0ee6c987, type: 2}
   m_StaticBatchInfo:
@@ -96,6 +98,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114121164961704176
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1465805348456024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7aa47a5ee002fe4f99b5987fcd298c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114587877375137388
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -10,6 +10,9 @@ public class Creator : MonoBehaviour {
 	public enum ID {TAVOLO=0};
 	public GameObject[] prefabs;
 
+	void Start(){
+		PrefabDictonary.Instance.Name = "SignoraStanza";
+	}
 
 	public void addTable(){
 	
@@ -25,6 +28,16 @@ public class Creator : MonoBehaviour {
 	}
 
 	public void addLamp(){
-		
+		 
+	}
+
+	// Save the current room.
+	public void SaveRoom(){
+		PrefabDictonary.Instance.Save();
+	}
+
+	// Load the last saved room.
+	public void LoadRoom(){
+		PrefabDictonary.Instance.Load();
 	}
 }

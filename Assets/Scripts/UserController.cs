@@ -17,6 +17,7 @@ public class UserController : MonoBehaviour {
 	// Object References
 	GameObject objToPlace = null;
 	InteractableObject interactible = null;
+	string prefabName = "";
 
 	// Flags
 	bool toChooseObj = true;
@@ -75,6 +76,9 @@ public class UserController : MonoBehaviour {
 				//					objToPlace.GetComponent<Collider> ().enabled = true;
 				toPlaceObj = false;
 				stateText.text = "Stato: Scegli";
+
+				// Save the object.
+				objToPlace.GetComponent<DictonaryEntity>().AddEntity(prefabName, objToPlace.transform.position, objToPlace.transform.rotation);
 			}
 		}
 
@@ -89,6 +93,8 @@ public class UserController : MonoBehaviour {
 			newObject = Instantiate(Resources.Load("Prefabs/Tavolo", typeof(GameObject)),
 				new Vector3(0, 5, 0), Quaternion.identity) as GameObject;
 
+			prefabName = "Tavolo";
+
 			return true;
 		}
 
@@ -96,6 +102,8 @@ public class UserController : MonoBehaviour {
 
 			newObject = Instantiate(Resources.Load("Prefabs/Lampada", typeof(GameObject)),
 				new Vector3(0, 5, 0), Quaternion.identity) as GameObject;
+
+			prefabName = "Lampada";
 
 			return true;
 		}
