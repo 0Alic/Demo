@@ -63,9 +63,32 @@ public class UserController : MonoBehaviour {
 					objToPlace.transform.position = hit.point;
 
 					// Vector3.Scale() == element wise product
-					//objToPlace.transform.position += Vector3.Scale (size, hit.normal);
+					objToPlace.transform.position += Vector3.Scale (size, hit.normal);
+					
+					// Debug nella scene view, non nel Game view
+					Debug.DrawRay(hit.point, new Vector3(1,0,0)*100, Color.green, 0.5f, false);
+					Debug.DrawRay(hit.point, new Vector3(-1,0,0)*100, Color.green, 0.5f, false);
+					Debug.DrawRay(hit.point, new Vector3(0,0,1)*100, Color.green, 0.5f, false);
+					Debug.DrawRay(hit.point, new Vector3(0,0,-1)*100, Color.green, 0.5f, false);
+					Debug.DrawRay(hit.point, new Vector3(0,1,0)*100, Color.green, 0.5f, false);
+					Debug.DrawRay(hit.point, new Vector3(0,-1,0)*100, Color.green, 0.5f, false);
+				}
+				else {
+
+					objToPlace.transform.position = hit.point;
+
+					// Vector3.Scale() == element wise product
+					objToPlace.transform.position += Vector3.Scale (size, hit.normal);
 
 				}
+
+				if(objToPlace.tag == "Obj_Floor"){
+					// TODO Farlo meglio, vincola la posizione sul suolo
+					objToPlace.transform.position = new Vector3(objToPlace.transform.position.x,
+																size.y,
+																objToPlace.transform.position.z);
+				}
+
 			}
 
 
@@ -75,11 +98,22 @@ public class UserController : MonoBehaviour {
 				toChooseObj = true;
 				//					objToPlace.GetComponent<Collider> ().enabled = true;
 				toPlaceObj = false;
+				// Freeze the position and rotation of the placed object (altrimenti quando si cozzano si spostano)
+				/*
+				Rigidbody objRb = objToPlace.GetComponent<Rigidbody>();
+				objRb.constraints = RigidbodyConstraints.FreezePositionX | 
+									RigidbodyConstraints.FreezePositionY |
+									RigidbodyConstraints.FreezePositionZ |
+									RigidbodyConstraints.FreezeRotationX | 
+									RigidbodyConstraints.FreezeRotationY |
+									RigidbodyConstraints.FreezeRotationZ;
+				*/
+				
 				stateText.text = "Stato: Scegli";
 
 				// Save the object.
 				// TODO: Da NullPointReference
-				//objToPlace.GetComponent<DictonaryEntity>().AddEntity(prefabName, objToPlace.transform.position, objToPlace.transform.rotation);
+				objToPlace.GetComponent<DictonaryEntity>().AddEntity(prefabName, objToPlace.transform.position, objToPlace.transform.rotation);
 			}
 		}
 

@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class InteractableObject : MonoBehaviour {
 
-
+	Rigidbody rb;
 	// Use this for initialization
 	void Start () {
 
+		rb = GetComponent<Rigidbody>();
 	}
 	
 	// Update is called once per frame
@@ -18,7 +19,9 @@ public class InteractableObject : MonoBehaviour {
 
 	void OnCollisionExit(Collision collision){
 
-		Debug.Log("COLLISIOn");
+		rb.velocity = new Vector3(0,0,0);
+//		Debug.Log("COLLISIOn");
 	}
+
 
 }
