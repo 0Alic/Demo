@@ -28,9 +28,11 @@ ExportedObj/
 *.meta
 *.dll.meta
 
-# Manifest
+# Manifest and other files
+UnityPackageManager/manifest.json
 Packages/manifest.json
 ProjectSettings/PresetManager.asset
+debug.log
 
 # Unity3D generated meta files
 *.pidb.meta
