@@ -63,7 +63,7 @@ public class UserController : MonoBehaviour {
 					objToPlace.transform.position = hit.point;
 
 					// Vector3.Scale() == element wise product
-					objToPlace.transform.position += Vector3.Scale (size, hit.normal);
+					//objToPlace.transform.position += Vector3.Scale (size, hit.normal);
 
 				}
 			}
@@ -78,7 +78,8 @@ public class UserController : MonoBehaviour {
 				stateText.text = "Stato: Scegli";
 
 				// Save the object.
-				objToPlace.GetComponent<DictonaryEntity>().AddEntity(prefabName, objToPlace.transform.position, objToPlace.transform.rotation);
+				// TODO: Da NullPointReference
+				//objToPlace.GetComponent<DictonaryEntity>().AddEntity(prefabName, objToPlace.transform.position, objToPlace.transform.rotation);
 			}
 		}
 

@@ -8,7 +8,6 @@ public class InteractableObject : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
 
 	}
 	
@@ -17,8 +16,9 @@ public class InteractableObject : MonoBehaviour {
 		
 	}
 
-	void OnCollisionEnter(Collision collision){
+	void OnCollisionExit(Collision collision){
 
+		Debug.Log("COLLISIOn");
 	}
 
 }
