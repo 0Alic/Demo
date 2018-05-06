@@ -55,11 +55,14 @@ public class UserController : MonoBehaviour {
 			objToPlace.GetComponent<Collider> ().enabled = true;
 
 
+//			objToPlace.transform.position = this.transform.GetChild(0).transform.position + this.transform.GetChild(0).transform.forward*10;
+
 			if (hitSomething) {
 
 				if (hit.transform.tag == "Room") {
 					// If I am hitting the room (object with Room tag)
 
+					
 					objToPlace.transform.position = hit.point;
 
 					// Vector3.Scale() == element wise product
@@ -72,7 +75,11 @@ public class UserController : MonoBehaviour {
 					Debug.DrawRay(hit.point, new Vector3(0,0,-1)*100, Color.green, 0.5f, false);
 					Debug.DrawRay(hit.point, new Vector3(0,1,0)*100, Color.green, 0.5f, false);
 					Debug.DrawRay(hit.point, new Vector3(0,-1,0)*100, Color.green, 0.5f, false);
+
+					
+
 				}
+				
 				else {
 
 					objToPlace.transform.position = hit.point;
@@ -81,39 +88,44 @@ public class UserController : MonoBehaviour {
 					objToPlace.transform.position += Vector3.Scale (size, hit.normal);
 
 				}
-
+				
 				if(objToPlace.tag == "Obj_Floor"){
 					// TODO Farlo meglio, vincola la posizione sul suolo
 					objToPlace.transform.position = new Vector3(objToPlace.transform.position.x,
 																size.y,
 																objToPlace.transform.position.z);
 				}
-
+				
 			}
 
-
-			if(Input.GetButtonDown("Fire1")){
+			if(Input.GetButtonDown("Fire1") ){
 				// Left mouse button
 
-				toChooseObj = true;
-				//					objToPlace.GetComponent<Collider> ().enabled = true;
-				toPlaceObj = false;
-				// Freeze the position and rotation of the placed object (altrimenti quando si cozzano si spostano)
-				/*
-				Rigidbody objRb = objToPlace.GetComponent<Rigidbody>();
-				objRb.constraints = RigidbodyConstraints.FreezePositionX | 
-									RigidbodyConstraints.FreezePositionY |
-									RigidbodyConstraints.FreezePositionZ |
-									RigidbodyConstraints.FreezeRotationX | 
-									RigidbodyConstraints.FreezeRotationY |
-									RigidbodyConstraints.FreezeRotationZ;
-				*/
-				
-				stateText.text = "Stato: Scegli";
+				if(!interactible.IsColliding){
 
-				// Save the object.
-				// TODO: Da NullPointReference
-				objToPlace.GetComponent<DictonaryEntity>().AddEntity(prefabName, objToPlace.transform.position, objToPlace.transform.rotation);
+					toChooseObj = true;
+					//					objToPlace.GetComponent<Collider> ().enabled = true;
+					toPlaceObj = false;
+					// Freeze the position and rotation of the placed object (altrimenti quando si cozzano si spostano)
+					
+					Rigidbody objRb = objToPlace.GetComponent<Rigidbody>();
+					objRb.constraints = RigidbodyConstraints.FreezePositionX | 
+										RigidbodyConstraints.FreezePositionY |
+										RigidbodyConstraints.FreezePositionZ |
+										RigidbodyConstraints.FreezeRotationX | 
+										RigidbodyConstraints.FreezeRotationY |
+										RigidbodyConstraints.FreezeRotationZ;
+					
+					
+					stateText.text = "Stato: Scegli";
+
+					// Save the object.
+					// TODO: Da NullPointReference
+					objToPlace.GetComponent<DictonaryEntity>().AddEntity(prefabName, objToPlace.transform.position, objToPlace.transform.rotation);
+				} 
+				else {
+					Debug.Log("Non posso qui, collide con altre robe");
+				}
 			}
 		}
 
@@ -147,4 +159,5 @@ public class UserController : MonoBehaviour {
 		newObject = null;
 		return false;
 	}
+
 }

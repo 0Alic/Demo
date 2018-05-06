@@ -9,6 +9,7 @@ TagManager:
   - Ceiling
   - Floor
   - Obj_Floor
+  - Obj_Wall
   layers:
   - Default
   - TransparentFX
