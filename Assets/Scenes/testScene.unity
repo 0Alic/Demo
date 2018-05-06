@@ -1609,7 +1609,6 @@ GameObject:
   m_Component:
   - component: {fileID: 685936502}
   - component: {fileID: 685936503}
-  - component: {fileID: 685936504}
   m_Layer: 0
   m_Name: User
   m_TagString: Untagged
@@ -1644,18 +1643,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   placedistance: 15
   stateText: {fileID: 1815201499}
---- !u!65 &685936504
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 685936501}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 2, y: 6, z: 2}
-  m_Center: {x: 0, y: -1.85, z: 0}
 --- !u!1 &840187023
 GameObject:
   m_ObjectHideFlags: 0
@@ -2513,7 +2500,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 14
   m_CollisionDetection: 0
 --- !u!65 &1204845452
 BoxCollider:
