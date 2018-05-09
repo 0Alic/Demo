@@ -377,8 +377,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 369.6, y: -64.9}
-  m_SizeDelta: {x: 692.2, y: 100}
+  m_AnchoredPosition: {x: 365, y: -71.2}
+  m_SizeDelta: {x: 688.3, y: 117.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &110188739
 MonoBehaviour:
@@ -413,7 +413,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "Aiuto:\n(Scegli): Premere 1 per un tavolo, 2 per una lampada\n(Posiziona):
-    Premere Mouse Sinistro per piazzarlo l\xEC per sempre"
+    Mouse Sinistro per piazzarlo l\xEC per sempre\n(Posiziona): Mouse Destro per ruotare"
 --- !u!222 &110188740
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1641,7 +1641,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65f9a207d3938704698d4bd0f81bd302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placedistance: 15
   stateText: {fileID: 1815201499}
 --- !u!1 &840187023
 GameObject:
@@ -3140,7 +3139,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 167.3, y: 35}
-  m_SizeDelta: {x: 300, y: 70}
+  m_SizeDelta: {x: 300.06, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1815201499
 MonoBehaviour:

@@ -16,6 +16,7 @@ public class UserController : MonoBehaviour {
 	InteractableObject interactible = null;
 	string prefabName = "";
 
+	private float rotY = 0;
 	// Layer's Mask
 	int roomMask;
 
@@ -33,6 +34,7 @@ public class UserController : MonoBehaviour {
 
 		chooseObject();
 		placeObject();
+
 	}
 
 	/************************************************************************/
@@ -116,6 +118,16 @@ public class UserController : MonoBehaviour {
 				} 
 
 			}
+
+			if(Input.GetButtonDown("Fire2")) {
+
+				rotY = (rotY + 90) % 360;
+
+			}
+
+			Quaternion final = Quaternion.Euler(0, rotY, 0);
+			objToPlace.transform.rotation = Quaternion.Slerp(objToPlace.transform.rotation, final, Time.deltaTime * 20);
+
 		}
 	}
 
