@@ -18,11 +18,17 @@ public class UserController : MonoBehaviour {
 	GameObject objToPlace = null;
 	InteractableObject interactible = null;
 	string prefabName = "";
+	int roomMask;
 
 	// Flags
 	bool toChooseObj = true;
 	bool toPlaceObj = false;
 
+
+	void Awake(){
+
+		roomMask = LayerMask.GetMask("RoomLayer");
+	}
 
 	void Update () {
 
@@ -50,9 +56,9 @@ public class UserController : MonoBehaviour {
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
 
-			objToPlace.GetComponent<Collider> ().enabled = false;
-			bool hitSomething = Physics.Raycast (ray, out hit);
-			objToPlace.GetComponent<Collider> ().enabled = true;
+//			objToPlace.GetComponent<Collider> ().enabled = false;
+			bool hitSomething = Physics.Raycast(ray, out hit, 1000f, roomMask);
+//			objToPlace.GetComponent<Collider> ().enabled = true;
 
 
 //			objToPlace.transform.position = this.transform.GetChild(0).transform.position + this.transform.GetChild(0).transform.forward*10;
@@ -69,13 +75,14 @@ public class UserController : MonoBehaviour {
 					objToPlace.transform.position += Vector3.Scale (size, hit.normal);
 					
 					// Debug nella scene view, non nel Game view
+					/*
 					Debug.DrawRay(hit.point, new Vector3(1,0,0)*100, Color.green, 0.5f, false);
 					Debug.DrawRay(hit.point, new Vector3(-1,0,0)*100, Color.green, 0.5f, false);
 					Debug.DrawRay(hit.point, new Vector3(0,0,1)*100, Color.green, 0.5f, false);
 					Debug.DrawRay(hit.point, new Vector3(0,0,-1)*100, Color.green, 0.5f, false);
 					Debug.DrawRay(hit.point, new Vector3(0,1,0)*100, Color.green, 0.5f, false);
 					Debug.DrawRay(hit.point, new Vector3(0,-1,0)*100, Color.green, 0.5f, false);
-
+					*/
 					
 
 				}

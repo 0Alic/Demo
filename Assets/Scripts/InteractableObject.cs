@@ -5,7 +5,12 @@ using UnityEngine;
 
 public class InteractableObject : MonoBehaviour {
 
+	public Material feasibleMat;
+	public Material unfeasibleMat;
+
+	/* Handle Collision with other Interactible Objects */
 	private bool isColliding = false;
+	private List<GameObject> collisionList = new List<GameObject>();
 
 	public bool IsColliding{
 
@@ -13,7 +18,6 @@ public class InteractableObject : MonoBehaviour {
 	}
 
 	Rigidbody rb;
-	Collision collisionObj;
 
 	// Use this for initialization
 	void Start () {
@@ -21,25 +25,18 @@ public class InteractableObject : MonoBehaviour {
 		rb = GetComponent<Rigidbody>();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-		if(collisionObj != null && collisionObj.gameObject.GetComponent<InteractableObject>() == null){
-			// I am colliding with an interactible obj 
-			isColliding = false;
-		}
-
-	}
 
 	void OnCollisionEnter(Collision collision){
+
 //		Debug.Log("Enter: " + collision.transform.tag);
 
 		if(collision.gameObject.GetComponent<InteractableObject>() != null){
 
-			isColliding = true;
-		}
+			collisionList.Add(collision.gameObject);
 
-		collisionObj = collision;
+			isColliding = true;
+			this.GetComponent<Renderer>().material = unfeasibleMat;
+		}
 
 	}
 
@@ -47,10 +44,18 @@ public class InteractableObject : MonoBehaviour {
 
 //		Debug.Log("Exit: " + collision.transform.tag);
 		
-		if(collision.gameObject.GetComponent<InteractableObject>() != null)
-			isColliding = false;
+		if(collision.gameObject.GetComponent<InteractableObject>() != null){
+
+			collisionList.Remove(collision.gameObject);
+
+			if(collisionList.Count == 0) {
+				// Check if I am not colliding with anyone anymore
+				isColliding = false;
+				this.GetComponent<Renderer>().material = feasibleMat;
+			}
+		}
 		
-		rb.velocity = new Vector3(0,0,0);
+//		rb.velocity = new Vector3(0,0,0);
 	}
 
 }
