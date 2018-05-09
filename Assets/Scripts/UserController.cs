@@ -12,9 +12,10 @@ public class UserController : MonoBehaviour {
 	public Text stateText;
 
 	// Object References
+	string prefabName = "";
 	GameObject objToPlace = null;
 	InteractableObject interactible = null;
-	string prefabName = "";
+	Material objMaterial = null;
 
 	private float rotY = 0;
 	// Layer's Mask
@@ -56,6 +57,8 @@ public class UserController : MonoBehaviour {
 			if (chooseFurniture(out objToPlace)) {
 
 				interactible = objToPlace.GetComponent<InteractableObject>();
+				interactible.HasPlaced = false;
+				objMaterial = objToPlace.GetComponent<Renderer>().material;
 
 				// Update status
 				toChooseObj = false;
@@ -111,6 +114,9 @@ public class UserController : MonoBehaviour {
 										RigidbodyConstraints.FreezeRotationY |
 										RigidbodyConstraints.FreezeRotationZ;
 					
+					objToPlace.GetComponent<Renderer>().material = objMaterial;
+					interactible.HasPlaced = true;
+
 					stateText.text = "Stato: Scegli";
 
 					// Save the object.
@@ -159,6 +165,17 @@ public class UserController : MonoBehaviour {
 
 			return true;
 		}
+
+		else if(Input.GetKeyDown ("3")){
+
+			newObject = Instantiate(Resources.Load("Prefabs/Comodino", typeof(GameObject)),
+				new Vector3(0, 5, 0), Quaternion.identity) as GameObject;
+
+			prefabName = "Comodino";
+
+			return true;
+		}
+		
 
 		newObject = null;
 		return false;
