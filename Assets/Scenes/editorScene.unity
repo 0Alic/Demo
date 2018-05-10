@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311926, g: 0.38074008, b: 0.35872707, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 25941951}
   - component: {fileID: 25941955}
   - component: {fileID: 25941954}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Back
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 44913037}
   - component: {fileID: 44913041}
   - component: {fileID: 44913040}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ceiling
   m_TagString: Ceiling
   m_Icon: {fileID: 0}
@@ -361,7 +361,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &110188738
 RectTransform:
   m_ObjectHideFlags: 0
@@ -377,8 +377,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 369.6, y: -64.9}
-  m_SizeDelta: {x: 692.2, y: 100}
+  m_AnchoredPosition: {x: 365, y: -71.2}
+  m_SizeDelta: {x: 688.3, y: 117.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &110188739
 MonoBehaviour:
@@ -413,7 +413,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "Aiuto:\n(Scegli): Premere 1 per un tavolo, 2 per una lampada\n(Posiziona):
-    Premere Mouse Sinistro per piazzarlo l\xEC per sempre"
+    Mouse Sinistro per piazzarlo l\xEC per sempre\n(Posiziona): Mouse Destro per ruotare"
 --- !u!222 &110188740
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -738,7 +738,7 @@ GameObject:
   m_Component:
   - component: {fileID: 155738512}
   - component: {fileID: 155738513}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: The Room
   m_TagString: Room
   m_Icon: {fileID: 0}
@@ -1038,6 +1038,7 @@ RectTransform:
   - {fileID: 1815201498}
   - {fileID: 1819106821}
   - {fileID: 937141780}
+  - {fileID: 1007142766}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1299,7 +1300,7 @@ GameObject:
   - component: {fileID: 543639352}
   - component: {fileID: 543639355}
   - component: {fileID: 543639356}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sx
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1641,7 +1642,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65f9a207d3938704698d4bd0f81bd302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placedistance: 15
   stateText: {fileID: 1815201499}
 --- !u!1 &840187023
 GameObject:
@@ -1854,7 +1854,7 @@ GameObject:
   - component: {fileID: 917607110}
   - component: {fileID: 917607114}
   - component: {fileID: 917607113}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Dx
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2277,6 +2277,81 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 954196030}
   m_Mesh: {fileID: 0}
+--- !u!1 &1007142765
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1007142766}
+  - component: {fileID: 1007142768}
+  - component: {fileID: 1007142767}
+  m_Layer: 5
+  m_Name: CmdText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1007142766
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1007142765}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 372103584}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -80, y: -94.1}
+  m_SizeDelta: {x: 160, y: 175.7}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1007142767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1007142765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 15
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 1
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "(Scegli)\n\n1) Tavolo\n2) Lampada a muro\n3) Comodino\n\n(Posiziona)\n\nMouse
+    Sx) Piazza\nMouse Dx) Ruota 90\xB0"
+--- !u!222 &1007142768
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1007142765}
 --- !u!1 &1021528956
 GameObject:
   m_ObjectHideFlags: 0
@@ -2888,7 +2963,7 @@ GameObject:
   - component: {fileID: 1749988205}
   - component: {fileID: 1749988209}
   - component: {fileID: 1749988208}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Front
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -3004,7 +3079,7 @@ GameObject:
   - component: {fileID: 1785274030}
   - component: {fileID: 1785274033}
   - component: {fileID: 1785274034}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Floor
   m_TagString: Floor
   m_Icon: {fileID: 0}
@@ -3139,8 +3214,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 167.3, y: 35}
-  m_SizeDelta: {x: 300, y: 70}
+  m_AnchoredPosition: {x: 97.6, y: 34.1}
+  m_SizeDelta: {x: 162.1, y: 36.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1815201499
 MonoBehaviour:
