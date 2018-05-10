@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 136984210465268986}
   - component: {fileID: 23034124304973370}
   - component: {fileID: 114698115208908672}
+  - component: {fileID: 114894091641924918}
   - component: {fileID: 54401511161300482}
   m_Layer: 0
   m_Name: Lampada
@@ -176,6 +177,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 508e7fc6ce222fd44927dcd1b6c911c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114894091641924918
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1854558453467770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7aa47a5ee002fe4f99b5987fcd298c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!136 &136984210465268986

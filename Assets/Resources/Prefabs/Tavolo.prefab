@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 23509990024513888}
   - component: {fileID: 114587877375137388}
   - component: {fileID: 54538995080440154}
-  - component: {fileID: 114468823338030562}
+  - component: {fileID: 114862476349932574}
   m_Layer: 0
   m_Name: Tavolo
   m_TagString: Obj_Floor
@@ -114,17 +114,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114468823338030562
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1465805348456024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 879d6056e3411d84ba71f972547ea097, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114587877375137388
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -134,5 +123,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 508e7fc6ce222fd44927dcd1b6c911c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114862476349932574
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1465805348456024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7aa47a5ee002fe4f99b5987fcd298c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

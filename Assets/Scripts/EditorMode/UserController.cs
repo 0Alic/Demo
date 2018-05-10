@@ -68,13 +68,13 @@ public class UserController : MonoBehaviour {
 					// Vector3.Scale() == element wise product
 					objToPlace.transform.position += Vector3.Scale (size, hit.normal);
 					
-					// Debug nella scene view, non nel Game view
-					Debug.DrawRay(hit.point, new Vector3(1,0,0)*100, Color.green, 0.5f, false);
-					Debug.DrawRay(hit.point, new Vector3(-1,0,0)*100, Color.green, 0.5f, false);
-					Debug.DrawRay(hit.point, new Vector3(0,0,1)*100, Color.green, 0.5f, false);
-					Debug.DrawRay(hit.point, new Vector3(0,0,-1)*100, Color.green, 0.5f, false);
-					Debug.DrawRay(hit.point, new Vector3(0,1,0)*100, Color.green, 0.5f, false);
-					Debug.DrawRay(hit.point, new Vector3(0,-1,0)*100, Color.green, 0.5f, false);
+					// // Debug nella scene view, non nel Game view
+					// Debug.DrawRay(hit.point, new Vector3(1,0,0)*100, Color.green, 0.5f, false);
+					// Debug.DrawRay(hit.point, new Vector3(-1,0,0)*100, Color.green, 0.5f, false);
+					// Debug.DrawRay(hit.point, new Vector3(0,0,1)*100, Color.green, 0.5f, false);
+					// Debug.DrawRay(hit.point, new Vector3(0,0,-1)*100, Color.green, 0.5f, false);
+					// Debug.DrawRay(hit.point, new Vector3(0,1,0)*100, Color.green, 0.5f, false);
+					// Debug.DrawRay(hit.point, new Vector3(0,-1,0)*100, Color.green, 0.5f, false);
 
 					
 

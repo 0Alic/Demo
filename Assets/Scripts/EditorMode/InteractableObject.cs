@@ -32,7 +32,7 @@ public class InteractableObject : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision collision){
-//		Debug.Log("Enter: " + collision.transform.tag);
+		Debug.Log("Enter: " + collision.transform.tag);
 
 		if(collision.gameObject.GetComponent<InteractableObject>() != null){
 
@@ -45,7 +45,7 @@ public class InteractableObject : MonoBehaviour {
 
 	void OnCollisionExit(Collision collision){
 
-//		Debug.Log("Exit: " + collision.transform.tag);
+		Debug.Log("Exit: " + collision.transform.tag);
 		
 		if(collision.gameObject.GetComponent<InteractableObject>() != null)
 			isColliding = false;
