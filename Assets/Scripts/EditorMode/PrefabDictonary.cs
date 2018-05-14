@@ -45,7 +45,9 @@ public class PrefabDictonary : ScriptableObject {
         }
     }
 
-    private string _Name = null;
+//    private string _Name = null;
+    private string _Name = "SignoraStanza";
+    
     private int currId;
     private Dictionary<int, Entity> dictionary;
 	private PrefabDictonary(){
@@ -53,6 +55,7 @@ public class PrefabDictonary : ScriptableObject {
         dictionary = new Dictionary<int, Entity>();
     }
 
+    /* 
 	private static PrefabDictonary _Instance;
 
 	public static PrefabDictonary Instance{
@@ -62,6 +65,7 @@ public class PrefabDictonary : ScriptableObject {
             return _Instance;
         }
     }
+    */
 
     public string Name{
         get{
