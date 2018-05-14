@@ -9,22 +9,22 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1015940306374688}
+  m_RootGameObject: {fileID: 1397890329947530}
   m_IsPrefabParent: 1
---- !u!1 &1015940306374688
+--- !u!1 &1397890329947530
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4336371785398056}
-  - component: {fileID: 33555246936057840}
-  - component: {fileID: 23582027241062072}
-  - component: {fileID: 65643523011771962}
-  - component: {fileID: 114214385741935578}
-  - component: {fileID: 114713203327201658}
-  - component: {fileID: 54373541877288202}
+  - component: {fileID: 4461784153910040}
+  - component: {fileID: 33543616097141628}
+  - component: {fileID: 23335979391470942}
+  - component: {fileID: 65420025066335558}
+  - component: {fileID: 54966057083303582}
+  - component: {fileID: 114059449462150180}
+  - component: {fileID: 114828566357189400}
   m_Layer: 0
   m_Name: Comodino
   m_TagString: Obj_Floor
@@ -32,12 +32,12 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4336371785398056
+--- !u!4 &4461784153910040
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1015940306374688}
+  m_GameObject: {fileID: 1397890329947530}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.2569926, y: 8.654863, z: -3.884388}
   m_LocalScale: {x: 3, y: 4, z: 10}
@@ -45,12 +45,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23582027241062072
+--- !u!23 &23335979391470942
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1015940306374688}
+  m_GameObject: {fileID: 1397890329947530}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -80,19 +80,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33555246936057840
+--- !u!33 &33543616097141628
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1015940306374688}
+  m_GameObject: {fileID: 1397890329947530}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54373541877288202
+--- !u!54 &54966057083303582
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1015940306374688}
+  m_GameObject: {fileID: 1397890329947530}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -102,38 +102,38 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &65643523011771962
+--- !u!65 &65420025066335558
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1015940306374688}
+  m_GameObject: {fileID: 1397890329947530}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114214385741935578
+--- !u!114 &114059449462150180
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1015940306374688}
+  m_GameObject: {fileID: 1397890329947530}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 879d6056e3411d84ba71f972547ea097, type: 3}
+  m_Script: {fileID: 11500000, guid: c96fe26345c8cac46a851daa150f630a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114713203327201658
+--- !u!114 &114828566357189400
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1015940306374688}
+  m_GameObject: {fileID: 1397890329947530}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 508e7fc6ce222fd44927dcd1b6c911c9, type: 3}
+  m_Script: {fileID: 11500000, guid: d07facac73ba5a24a8831ff50e6c9ead, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   feasibleMat: {fileID: 2100000, guid: 45c905449c0c0084a92e426b0ee6c987, type: 2}
