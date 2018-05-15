@@ -7,7 +7,7 @@ using DemoAv.SmartMenu;
 
 public class TvMenuFactory : MonoBehaviour {
 
-	static LayerMask menuMask;
+	static LayerMask menuMask = 1 << 9;
 	public enum Type { PANEL_MENU, TEXT_MENU };
 	Dictionary<string, Menu> menus = new Dictionary<string, Menu>();		// The already existents menu.
 	GameObject activeMenuObj = null;										// The menu game object currently active.
@@ -66,14 +66,21 @@ public class TvMenuFactory : MonoBehaviour {
 	}
 
 	public void SetActiveMenu(string name){
-		Transform searchedMenu = transform.Find("MenuRoot/" + name);
-
-		// If the menu exists, show it.
-		if(searchedMenu != null){
-			if(activeMenuObj != null) 		activeMenuObj.SetActive(false);
-			activeMenuObj = searchedMenu.gameObject;
-			activeMenuObj.SetActive(true);
-			menus.TryGetValue(name, out activeMenu);
+		// If null is passed, just deactivate all the menus.
+		if(name == null){
+			activeMenuObj.SetActive(false);
+			activeMenuObj = null;
 		}
+		else{
+			Transform searchedMenu = transform.Find("MenuRoot/" + name);
+
+			// If the menu exists, show it.
+			if(searchedMenu != null){
+				if(activeMenuObj != null) 		activeMenuObj.SetActive(false);
+				activeMenuObj = searchedMenu.gameObject;
+				activeMenuObj.SetActive(true);
+				menus.TryGetValue(name, out activeMenu);
+			}
+		}		
 	}
 }

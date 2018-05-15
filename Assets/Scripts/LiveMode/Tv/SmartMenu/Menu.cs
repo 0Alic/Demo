@@ -15,7 +15,7 @@ public abstract class Menu {
 			this.texture = tex;
 		}
 	};
-	public delegate void ItemCallback();
+	public delegate void ItemCallback(string name);
 
 	// Attributes.
 	protected const int menuLayer = 10;
@@ -57,7 +57,7 @@ public abstract class Menu {
 	}
 
 	public void Active(string item){
-		GetCallback(item)();
+		GetCallback(item)(item);
 	}
 
 	// Methods to override.
