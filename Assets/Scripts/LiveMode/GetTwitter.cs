@@ -10,10 +10,10 @@ public class GetTwitter : MonoBehaviour {
 
 	void Start () {
 		
-		Twity.Oauth.consumerKey = TwitterKeys.ConsumerKey;
-		Twity.Oauth.consumerSecret = TwitterKeys.ConsumerSecret;
-		Twity.Oauth.accessToken = TwitterKeys.AccessToken;
-		Twity.Oauth.accessTokenSecret= TwitterKeys.AccessTokenSecret;
+		// Twity.Oauth.consumerKey = TwitterKeys.ConsumerKey;
+		// Twity.Oauth.consumerSecret = TwitterKeys.ConsumerSecret;
+		// Twity.Oauth.accessToken = TwitterKeys.AccessToken;
+		// Twity.Oauth.accessTokenSecret= TwitterKeys.AccessTokenSecret;
 
 		Dictionary<string, string> parameters = new Dictionary<string, string>();
 		parameters ["count"] = 2.ToString();

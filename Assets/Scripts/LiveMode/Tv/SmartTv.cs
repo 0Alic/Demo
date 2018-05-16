@@ -53,7 +53,7 @@ namespace DemoAv.SmarTv{
 		void PlayVideo(string url){
 			player.url = url;
 
-			KeyboardHandler.AddCallback(KeyCode.Space, PauseVideo);
+			KeyboardHandler.AddCallback(KeyboardHandler.Map.KEY_DOWN, KeyCode.Space, PauseVideo);
 
 			StartCoroutine(StartVideo());
 		}
