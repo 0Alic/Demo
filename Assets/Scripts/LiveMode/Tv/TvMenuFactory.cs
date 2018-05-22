@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using DemoAv.SmartMenu;
+using DemoAV.SmartMenu;
 
 public class TvMenuFactory : MonoBehaviour {
 
@@ -12,6 +12,7 @@ public class TvMenuFactory : MonoBehaviour {
 	Dictionary<string, Menu> menus = new Dictionary<string, Menu>();		// The already existents menu.
 	GameObject activeMenuObj = null;										// The menu game object currently active.
 	Menu activeMenu;														// The menu currently active.
+	Stack<string> menuStack = new Stack<string>();							// The stack of menus.
 	public GameObject remoteController;
 	LineRenderer liner;
 
@@ -70,17 +71,31 @@ public class TvMenuFactory : MonoBehaviour {
 		if(name == null){
 			activeMenuObj.SetActive(false);
 			activeMenuObj = null;
+			menuStack.Clear();
 		}
 		else{
 			Transform searchedMenu = transform.Find("MenuRoot/" + name);
 
 			// If the menu exists, show it.
 			if(searchedMenu != null){
-				if(activeMenuObj != null) 		activeMenuObj.SetActive(false);
+				if(activeMenuObj != null){
+					activeMenuObj.SetActive(false);
+				
+					// Add the old menu to the stack of active menu.
+					menuStack.Push(activeMenuObj.name);
+				} 		
+				
 				activeMenuObj = searchedMenu.gameObject;
 				activeMenuObj.SetActive(true);
 				menus.TryGetValue(name, out activeMenu);
 			}
 		}		
+	}
+
+	/// <summary>
+	/// 	Came back to the menu shown just before the current one, if any.
+	/// </summary>
+	public void GoBack(){
+		SetActiveMenu(menuStack.Pop());
 	}
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 using TMPro;
 
-namespace DemoAv.SmartMenu{
+namespace DemoAV.SmartMenu{
 public class TextMenu : Menu {
     struct TextMenuInfo{
 		public float width, height;

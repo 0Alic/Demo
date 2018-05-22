@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
 
-using DemoAv.SmartMenu;
+using DemoAV.SmartMenu;
 
-namespace DemoAv.SmarTv{
+namespace DemoAV.Live.SmarTv{
     class TvLocalStreaming : ITvApp{
+        const string supportedExtension = "mp4,avi";
         public delegate void PlayFunc(string file);
         string path;
         TvMenuFactory menuFact;
@@ -34,6 +35,10 @@ namespace DemoAv.SmarTv{
             return streamingTex;
         }
 
+        /// <summary>
+        ///     The function to call when the streaming function is selected.
+        /// </summary>
+        /// <param name="name"></param>
         void ITvApp.ItemCallback(string name){
             Menu fileMenu = menuFact.CreateMenu(TvMenuFactory.Type.TEXT_MENU, "FileMenu");
             // If the menu doesn't exist, create it.
@@ -41,7 +46,8 @@ namespace DemoAv.SmarTv{
                 string[] files = Directory.GetFiles(path);
 
                 foreach(string file in files){
-                    fileMenu.AddMenuItem(new Menu.MenuItem(Path.GetFileName(file), "", null), StartStreaming);
+                    if(supportedExtension.Contains(file.Substring(file.LastIndexOf(".")+1)))
+                        fileMenu.AddMenuItem(new Menu.MenuItem(Path.GetFileName(file), "", null), StartStreaming);
                 }
             }
 
@@ -49,6 +55,10 @@ namespace DemoAv.SmarTv{
             menuFact.SetActiveMenu("FileMenu");
         }
 
+        /// <summary>
+        ///     Starts the streaming of the chosen file.
+        /// </summary>
+        /// <param name="name"> The name of the file to stream. </param>
         void StartStreaming(string name){
             Debug.Log(path + name);
             // Start the video streaming.

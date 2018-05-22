@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DemoAv.SmartMenu{
+namespace DemoAV.SmartMenu{
 public class PanelMenu : Menu {
     struct PanelMenuInfo{
 		public int itemsPerRow, itemsPerTab, count;

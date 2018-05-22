@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DemoAv.SmartMenu{
+namespace DemoAV.SmartMenu{
 public abstract class Menu {
 	// Declaration of struct and delegate.
 	public struct MenuItem{
@@ -46,22 +46,49 @@ public abstract class Menu {
 	}
 
 	// Methods.
+	/// <summary>
+	/// 	Sets a callback for a given item of that menu. The function is called when
+	/// 	the item is selected from the menu.
+	/// </summary>
+	/// <param name="name"> The name of the item. </param>
+	/// <param name="callback"> The callback for the item. </param>
 	protected void SetCallback(string name, ItemCallback callback){
 		callbacks.Add(name, callback);
 	}
 
+	/// <summary>
+	/// 	Returns a callback for a given item.
+	/// </summary>
+	/// <param name="name"> The item. </param>
+	/// <returns></returns>
 	protected ItemCallback GetCallback(string name){
 		ItemCallback callback;
 		callbacks.TryGetValue(name, out callback);
 		return callback;
 	}
 
+	/// <summary>
+	/// 	Calls the callback of a given menu item.
+	/// </summary>
+	/// <param name="item"> The item of which invoke the callback. </param>
 	public void Active(string item){
 		GetCallback(item)(item);
 	}
 
 	// Methods to override.
+
+	/// <summary>
+	/// 	
+	/// </summary>
+	/// <param name="item"></param>
 	public abstract void SetSelected(string item);
+
+	/// <summary>
+	/// 	Adds a new item to the menu.
+	/// </summary>
+	/// <param name="item"> The item to add. </param>
+	/// <param name="callback"> The callback associated with that item. </param>
+	/// <returns></returns>
 	public abstract bool AddMenuItem(MenuItem item, ItemCallback callback);
 }
 }

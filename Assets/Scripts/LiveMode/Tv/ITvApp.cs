@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace DemoAv.SmarTv{
+namespace DemoAV.Live.SmarTv{
 
     interface ITvApp{
         string GetName();

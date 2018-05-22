@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu] 
+namespace  DemoAV.common {
 public class KeyboardHandler : MonoBehaviour {
 	public delegate void KeyCallback();
 	public enum Map{
@@ -10,8 +10,16 @@ public class KeyboardHandler : MonoBehaviour {
 		KEY_UP = 1,
 		KEY_PRESSED = 2
 	};
-	static Dictionary<KeyCode, HashSet<KeyCallback>>[] keyMap;
-	static Dictionary<KeyCode, HashSet<KeyCallback>>[] mapBackup;	
+	static Dictionary<KeyCode, HashSet<KeyCallback>>[] keyMap = new Dictionary<KeyCode, HashSet<KeyCallback>>[3]{
+		new Dictionary<KeyCode, HashSet<KeyCallback>>(), 
+		new Dictionary<KeyCode, HashSet<KeyCallback>>(), 
+		new Dictionary<KeyCode, HashSet<KeyCallback>>()
+	};
+	static Dictionary<KeyCode, HashSet<KeyCallback>>[] mapBackup = new Dictionary<KeyCode, HashSet<KeyCallback>>[3]{
+		new Dictionary<KeyCode, HashSet<KeyCallback>>(), 
+		new Dictionary<KeyCode, HashSet<KeyCallback>>(), 
+		new Dictionary<KeyCode, HashSet<KeyCallback>>()
+	};	
 
 	void Awake(){
 		DontDestroyOnLoad(gameObject);
@@ -19,17 +27,6 @@ public class KeyboardHandler : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		keyMap = new Dictionary<KeyCode, HashSet<KeyCallback>>[3]{
-			new Dictionary<KeyCode, HashSet<KeyCallback>>(), 
-			new Dictionary<KeyCode, HashSet<KeyCallback>>(), 
-			new Dictionary<KeyCode, HashSet<KeyCallback>>()
-		};
-
-		mapBackup = new Dictionary<KeyCode, HashSet<KeyCallback>>[3]{
-			new Dictionary<KeyCode, HashSet<KeyCallback>>(), 
-			new Dictionary<KeyCode, HashSet<KeyCallback>>(), 
-			new Dictionary<KeyCode, HashSet<KeyCallback>>()
-		};
 	}
 	
 	// Update is called once per frame
@@ -43,14 +40,14 @@ public class KeyboardHandler : MonoBehaviour {
 
 		// Key up.
 		foreach(KeyValuePair<KeyCode, HashSet<KeyCallback>> keyPair in keyMap[(int)Map.KEY_UP]){
-			if(Input.GetKeyDown(keyPair.Key))
+			if(Input.GetKeyUp(keyPair.Key))
 				foreach(KeyCallback callback in keyPair.Value)
 					callback();
 		}
 
 		// Key pressed.
 		foreach(KeyValuePair<KeyCode, HashSet<KeyCallback>> keyPair in keyMap[(int)Map.KEY_PRESSED]){
-			if(Input.GetKeyDown(keyPair.Key))
+			if(Input.GetKey(keyPair.Key))
 				foreach(KeyCallback callback in keyPair.Value)
 					callback();
 		}
@@ -140,3 +137,5 @@ public class KeyboardHandler : MonoBehaviour {
 			currDic[key] = mapBackup[(int)type][key];
 	}
 }
+}
+
