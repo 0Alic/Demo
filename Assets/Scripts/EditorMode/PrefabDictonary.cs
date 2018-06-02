@@ -77,9 +77,19 @@ public class PrefabDictonary : ScriptableObject {
         }
     }
 
+    // Modify an already existing element
+    public void AddEntity(int id, string name, Vector3 position, Quaternion rotation) {
+        dictionary[id] = new Entity(name, position, rotation);
+    }
+
+    // Add a new element to the dictionary
     public int AddEntity(string name, Vector3 position, Quaternion rotation){
         dictionary.Add(currId, new Entity(name, position, rotation));
         return currId++;
+    }
+
+    public void RemoveEntity(int id) {
+        dictionary.Remove(id);
     }
 
     public void UpdatePosition(int id, Vector3 position){
@@ -92,8 +102,10 @@ public class PrefabDictonary : ScriptableObject {
         Entity[] entities = new Entity[dictionary.Count];
         int i = 0;
 
-        foreach(KeyValuePair<int, Entity> en in dictionary)
+        foreach(KeyValuePair<int, Entity> en in dictionary){
+            Debug.Log("value: " + en.Value + "");
             entities[i++] = en.Value;
+        }
 
         binary.Serialize(file, entities);
         file.Close();
@@ -108,9 +120,23 @@ public class PrefabDictonary : ScriptableObject {
             file.Close();
 
             foreach(Entity en in entities){
-                GameObject currObj = Object.Instantiate(Resources.Load("Prefabs/" + en.prefabName), en.position, en.rotation) as GameObject;
+                Debug.Log(en.prefabName);
+                GameObject currObj = Object.Instantiate(Resources.Load("EditorPrefabs/" + en.prefabName), en.position, en.rotation) as GameObject;
                 currObj.GetComponent<DictonaryEntity>().AddEntity(en.prefabName, en.position, en.rotation);
+                freezeObject(currObj);
             }
         }
+    }
+
+
+    // Helpers
+    private void freezeObject(GameObject obj){
+        Rigidbody objRb = obj.GetComponent<Rigidbody>();
+        objRb.constraints = RigidbodyConstraints.FreezePositionX | 
+                            RigidbodyConstraints.FreezePositionY |
+                            RigidbodyConstraints.FreezePositionZ |
+                            RigidbodyConstraints.FreezeRotationX | 
+                            RigidbodyConstraints.FreezeRotationY |
+                            RigidbodyConstraints.FreezeRotationZ;
     }
 }

@@ -9,14 +9,17 @@ public class UserPlaceObject : MonoBehaviour {
 
 	GameObject objToPlace;
 	string objName;
-	ModifyObject modifyScript;
+	ModifyObject modifyObjScript;
 
 	int roomMask;
+	
 	void Awake () {
-		roomMask = LayerMask.GetMask("RoomLayer");
 		chooseScript = GetComponent<UserChooseObject>();
 	}
 	
+	void Start() {
+		roomMask = LayerMask.GetMask("RoomLayer");
+	}
 	void Update () {
 		// If I have chosen an obj and I need to place it
 
@@ -40,13 +43,18 @@ public class UserPlaceObject : MonoBehaviour {
 				objToPlace.transform.position = new Vector3(objToPlace.transform.position.x,
 															size.y,
 															objToPlace.transform.position.z);
-			}	
+			}
+
+			if(objToPlace.tag == "Obj_Ceiling") {
+
+				// TODO attaccarlo solo al soffitto?
+			}
 		}
 
 		if(Input.GetButtonDown("Fire1")) {
 			// Left mouse button
 
-			if(!modifyScript.IsColliding){
+			if(!modifyObjScript.IsColliding){
 
 				// Freeze the position and rotation of the placed object (altrimenti quando si cozzano si spostano)
 				Rigidbody objRb = objToPlace.GetComponent<Rigidbody>();
@@ -57,24 +65,50 @@ public class UserPlaceObject : MonoBehaviour {
 									RigidbodyConstraints.FreezeRotationY |
 									RigidbodyConstraints.FreezeRotationZ;
 				
-				modifyScript.enabled = false;
-
-				this.enabled = false;
-				chooseScript.enabled = true;
-
 				// Save the object.
-				objToPlace.GetComponent<DictonaryEntity>().AddEntity(objName, objToPlace.transform.position, objToPlace.transform.rotation);
+				DictonaryEntity objEntity = objToPlace.GetComponent<DictonaryEntity>();
+				if(objEntity.ID == -1){
+					// Not already stored
+					objToPlace.GetComponent<DictonaryEntity>().AddEntity(objName, objToPlace.transform.position, objToPlace.transform.rotation);
+				} else {
+					// Already stored
+					objToPlace.GetComponent<DictonaryEntity>().AddEntity(objEntity.ID, objName, objToPlace.transform.position, objToPlace.transform.rotation);
+				}
+				
+				switchMode();
 			} 
+		}
 
-		}		
+		if(Input.GetKeyDown(KeyCode.Backspace)){
+			// Delete the object
+			DictonaryEntity objEntity = objToPlace.GetComponent<DictonaryEntity>();
+			if(objEntity.ID != -1){
+				// The object was previuosly stored, delete the entry at the dictionary
+				objEntity.RemoveEntity(objEntity.ID);
+			}
+
+			Destroy(objToPlace);
+			switchMode();
+		}	
 	}
 
 
 	public void setObject(GameObject obj, string name) {
+		// Called by the UserController script to pass the data and activate this script
 
 		objToPlace = obj;
 		objName = name;
-		modifyScript = objToPlace.GetComponent<ModifyObject>();
-		modifyScript.enabled = true;
+		modifyObjScript = objToPlace.GetComponent<ModifyObject>();
+		modifyObjScript.enabled = true;
+	}
+
+
+	// Helpers
+	private void switchMode(){
+		// Go back to choose mode
+
+		chooseScript.enabled = true;
+		modifyObjScript.enabled = false;
+		this.enabled = false;
 	}
 }

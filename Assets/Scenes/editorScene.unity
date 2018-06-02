@@ -1248,6 +1248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stateText: {fileID: 1007142767}
+  selectedMaterial: {fileID: 2100000, guid: 572b2bbe628685243a76527e3b17ea12, type: 2}
 --- !u!1 &840187023
 GameObject:
   m_ObjectHideFlags: 0
@@ -1914,8 +1915,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -80, y: -94.1}
-  m_SizeDelta: {x: 160, y: 175.7}
+  m_AnchoredPosition: {x: -114.8, y: -121.2}
+  m_SizeDelta: {x: 209, y: 223.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1007142767
 MonoBehaviour:
@@ -1949,8 +1950,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "(Scegli)\n\n1) Tavolo\n2) Lampada a muro\n3) Comodino\n\n(Posiziona)\n\nMouse
-    Sx) Piazza\nMouse Dx) Ruota 90\xB0"
+  m_Text: "(Scegli)\n\n1) Tavolo\n2) Lampada a muro\n3) Comodino\n4) Quadro\n\nW)
+    Modifica oggetto selezionato\n\n(Posiziona)\n\nMouse Sx) Piazza\nMouse Dx) Ruota
+    90\xB0"
 --- !u!222 &1007142768
 CanvasRenderer:
   m_ObjectHideFlags: 0

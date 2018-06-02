@@ -19,7 +19,6 @@ public class ModifyObject : MonoBehaviour {
 	/* Handle Collision with other Interactible Objects */
 	private bool isColliding = false;
 	private HashSet<GameObject> interactibleCollisionList = new HashSet<GameObject>();
-	private HashSet<GameObject> wallCollisionList = new HashSet<GameObject>();
 
 	/* User modifications */
 	private float rotY = 0;
@@ -79,15 +78,7 @@ public class ModifyObject : MonoBehaviour {
 				isColliding = true;
 				this.GetComponent<Renderer>().material = unfeasibleMat;
 			}
-
-			
-			if(collision.gameObject.layer == LayerMask.NameToLayer("RoomLayer")){
-				
-				if(collision.gameObject.GetComponent<Renderer>().bounds.Intersects(this.GetComponent<Renderer>().bounds))
-					wallCollisionList.Add(collision.gameObject);
-			}
 		}
-		
 	}
 
 	void OnCollisionExit(Collision collision){
@@ -103,11 +94,6 @@ public class ModifyObject : MonoBehaviour {
 					this.GetComponent<Renderer>().material = feasibleMat;
 				}
 			}
-
-			if(collision.gameObject.layer == LayerMask.NameToLayer("RoomLayer")){
-				
-				wallCollisionList.Remove(collision.gameObject);
-			}		
 		}
 	}
 }

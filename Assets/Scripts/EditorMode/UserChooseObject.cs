@@ -11,6 +11,10 @@ public class UserChooseObject : MonoBehaviour {
 	// Object
 	string prefabName = "";
 	GameObject objToPlace = null;
+	public Material selectedMaterial;
+
+	// Mask
+	int furnitureMask;
 
 	// Placing script reference
 	UserPlaceObject placingScript;
@@ -19,8 +23,13 @@ public class UserChooseObject : MonoBehaviour {
 		placingScript = GetComponent<UserPlaceObject>();
 	}
 
+	void Start() {
+		furnitureMask = LayerMask.GetMask("FurnitureLayer");
+	}
+
 	void Update () {
 		
+		// Check if the user wants to place a new furniture
 		if (chooseFurniture(out objToPlace)) {
 
 			placingScript.setObject(objToPlace, prefabName);
@@ -28,6 +37,22 @@ public class UserChooseObject : MonoBehaviour {
 			// Update status: switch working scripts
 			this.enabled = false;
 			placingScript.enabled = true;
+		}
+
+		// Check if the user wants to modify an already placed furniture
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		RaycastHit hit;
+		
+		if(Physics.Raycast(ray, out hit, 1000f, furnitureMask)) {
+
+			if(Input.GetKeyDown("w")) {
+
+				placingScript.setObject(hit.transform.gameObject, hit.transform.gameObject.name);
+
+				// Update status: switch working scripts
+				this.enabled = false;
+				placingScript.enabled = true;
+			}
 		}
 	}
 
@@ -58,6 +83,11 @@ public class UserChooseObject : MonoBehaviour {
 			return true;
 		}
 
+		else if(Input.GetKeyDown ("4")){
+			newObject = loadResource("Quadro");
+			return true;
+		}
+
 		newObject = null;
 		return false;
 	}
@@ -65,7 +95,7 @@ public class UserChooseObject : MonoBehaviour {
 	private GameObject loadResource(string res) {
 
 		prefabName = res;
-		return Instantiate(Resources.Load("Prefabs/" + res, typeof(GameObject)),
+		return Instantiate(Resources.Load("EditorPrefabs/" + res, typeof(GameObject)),
 				new Vector3(0, 5, 0), Quaternion.identity) as GameObject;
 	}
 

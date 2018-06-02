@@ -106,13 +106,30 @@ public class UserController : MonoBehaviour {
 									RigidbodyConstraints.FreezeRotationY |
 									RigidbodyConstraints.FreezeRotationZ;
 				
+				// Save the object.
+				DictonaryEntity objEntity = objToPlace.GetComponent<DictonaryEntity>();
+				if(objEntity.ID == -1){
+					// Not already stored
+					objToPlace.GetComponent<DictonaryEntity>().AddEntity(prefabName, objToPlace.transform.position, objToPlace.transform.rotation);
+				} else {
+					// Already stored
+					objToPlace.GetComponent<DictonaryEntity>().AddEntity(objEntity.ID, prefabName, objToPlace.transform.position, objToPlace.transform.rotation);
+				}
+
 				interactible.enabled = false;
 				stateText.text = "Stato: Scegli";
-
-				// Save the object.
-				objToPlace.GetComponent<DictonaryEntity>().AddEntity(prefabName, objToPlace.transform.position, objToPlace.transform.rotation);
 			} 
+		}
 
+		if(Input.GetKeyDown(KeyCode.Backspace)) {
+			// Delete the object
+			DictonaryEntity objEntity = objToPlace.GetComponent<DictonaryEntity>();
+			if(objEntity.ID != -1){
+				// The object was previuosly stored, delete the entry at the dictionary
+				objEntity.RemoveEntity(objEntity.ID);
+			}
+
+			Destroy(objToPlace);
 		}
 	}
 
