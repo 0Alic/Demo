@@ -852,7 +852,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stateText: {fileID: 1815201499}
-  selectedMaterial: {fileID: 2100000, guid: 572b2bbe628685243a76527e3b17ea12, type: 2}
 --- !u!1 &917607108
 GameObject:
   m_ObjectHideFlags: 0

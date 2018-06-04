@@ -14,11 +14,6 @@ public class ModifyObject : MonoBehaviour {
 	public Material feasibleMat;
 	public Material unfeasibleMat;
 
-	private Material defaultMat;
-	public Material DefaultMaterial {
-		get { return defaultMat; }
-	}
-
 	/* Handle Collision with other Interactible Objects */
 	private bool isColliding = false;
 	private HashSet<GameObject> interactibleCollisionList = new HashSet<GameObject>();
@@ -36,7 +31,6 @@ public class ModifyObject : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 
-		defaultMat = this.GetComponent<Renderer>().material;
 		this.GetComponent<Renderer>().material = feasibleMat;
 	}
 	
@@ -52,10 +46,7 @@ public class ModifyObject : MonoBehaviour {
 
 	void OnEnable() {
 		GetComponent<Renderer>().material = feasibleMat;
-	}
-
-	void OnDisable(){
-		GetComponent<Renderer>().material = defaultMat;
+		Debug.Log(rotY);
 	}
 
 	/* 

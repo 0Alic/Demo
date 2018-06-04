@@ -45,7 +45,6 @@ public class PrefabDictonary : ScriptableObject {
         }
     }
 
-//    private string _Name = null;
     private string _Name = "SignoraStanza";
     
     private int currId;
@@ -54,18 +53,6 @@ public class PrefabDictonary : ScriptableObject {
         currId = 0;
         dictionary = new Dictionary<int, Entity>();
     }
-
-    /* 
-	private static PrefabDictonary _Instance;
-
-	public static PrefabDictonary Instance{
-        get{
-            if (_Instance == null)
-                _Instance = new PrefabDictonary();
-            return _Instance;
-        }
-    }
-    */
 
     public string Name{
         get{
@@ -103,7 +90,6 @@ public class PrefabDictonary : ScriptableObject {
         int i = 0;
 
         foreach(KeyValuePair<int, Entity> en in dictionary){
-            Debug.Log("value: " + en.Value + "");
             entities[i++] = en.Value;
         }
 
@@ -123,7 +109,7 @@ public class PrefabDictonary : ScriptableObject {
                 GameObject currObj = Object.Instantiate(Resources.Load("EditorPrefabs/" + en.prefabName), en.position, en.rotation) as GameObject;
                 currObj.GetComponent<DictonaryEntity>().AddEntity(en.prefabName, en.position, en.rotation);
                 freezeObject(currObj);
-                currObj.GetComponent<MeshRenderer>().material = currObj.GetComponent<ModifyObject>().DefaultMaterial;
+                currObj.GetComponent<MeshRenderer>().material = currObj.GetComponent<Interactible>().DefaultMaterial;
             }
         }
     }

@@ -5,13 +5,17 @@ using UnityEngine.UI;
 
 public class UserChooseObject : MonoBehaviour {
 
+	public delegate void SelectAction(GameObject obj);
+	public delegate void DeselectAction();
+	public static event SelectAction Select;
+	public static event DeselectAction Deselect;
+
 	// UI
 	public Text stateText;
 
 	// Object
 	string prefabName = "";
 	GameObject objToPlace = null;
-	public Material selectedMaterial;
 
 	// Mask
 	int furnitureMask;
@@ -33,6 +37,7 @@ public class UserChooseObject : MonoBehaviour {
 		if (chooseFurniture(out objToPlace)) {
 
 			placingScript.setObject(objToPlace, prefabName);
+			objToPlace.GetComponent<Interactible>().RemoveSelectionEvent();
 
 			// Update status: switch working scripts
 			this.enabled = false;
@@ -45,14 +50,23 @@ public class UserChooseObject : MonoBehaviour {
 		
 		if(Physics.Raycast(ray, out hit, 1000f, furnitureMask)) {
 
+			GameObject obj = hit.transform.gameObject;
+
+			if(Deselect != null) Deselect(); // Call Deselect event
+			if(Select != null) Select(obj); // Call Select event
+
 			if(Input.GetKeyDown("w")) {
 
-				placingScript.setObject(hit.transform.gameObject, hit.transform.gameObject.name);
+				placingScript.setObject(obj, obj.name);
+				obj.GetComponent<Interactible>().RemoveSelectionEvent();
 
 				// Update status: switch working scripts
 				this.enabled = false;
 				placingScript.enabled = true;
 			}
+		}
+		else {
+			if(Deselect != null) Deselect(); // Call Deselect event
 		}
 	}
 
@@ -63,7 +77,6 @@ public class UserChooseObject : MonoBehaviour {
 
 	void OnDisable(){
 		stateText.text = "Stato: Posiziona";
-		Debug.Log(stateText.text);
 	}
 
 	/* Choose a furniture with numbers as input key */

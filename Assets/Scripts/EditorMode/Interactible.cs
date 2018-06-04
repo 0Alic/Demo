@@ -6,8 +6,11 @@ public class Interactible : MonoBehaviour {
 
 	// Store the wall I am colliding with
 	private HashSet<GameObject> wallCollisionList = new HashSet<GameObject>();
-
-	
+	public Material selectedMaterial;
+	public Material defaultMaterial;
+	public Material DefaultMaterial {
+		get { return defaultMaterial; }
+	}
 	void Update () {
 		
 		if(wallCollisionList.Count > 0){
@@ -38,5 +41,24 @@ public class Interactible : MonoBehaviour {
 				
 			wallCollisionList.Remove(collision.gameObject);
 		}		
+	}
+
+	void selectColor(GameObject obj){
+		if(obj != null && GameObject.ReferenceEquals(obj, this.gameObject))
+			GetComponent<MeshRenderer>().material = selectedMaterial;
+	}
+
+	void defaultColor() {
+		GetComponent<MeshRenderer>().material = defaultMaterial;
+	}
+
+	public void AddSelectionEvent(){
+		UserChooseObject.Select += selectColor;
+		UserChooseObject.Deselect += defaultColor;
+	}
+
+	public void RemoveSelectionEvent() {
+		UserChooseObject.Select -= selectColor;
+		UserChooseObject.Deselect -= defaultColor;
 	}
 }

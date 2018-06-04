@@ -107,6 +107,7 @@ public class UserPlaceObject : MonoBehaviour {
 	private void switchMode(){
 		// Go back to choose mode
 
+		objToPlace.GetComponent<Interactible>().AddSelectionEvent();
 		chooseScript.enabled = true;
 		modifyObjScript.enabled = false;
 		this.enabled = false;
