@@ -851,7 +851,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4521a92e97cad64295bbb30d19d83ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stateText: {fileID: 1007142767}
+  stateText: {fileID: 1815201499}
   selectedMaterial: {fileID: 2100000, guid: 572b2bbe628685243a76527e3b17ea12, type: 2}
 --- !u!1 &917607108
 GameObject:
@@ -1683,8 +1683,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 97.6, y: 34.1}
-  m_SizeDelta: {x: 162.1, y: 36.9}
+  m_AnchoredPosition: {x: 104.4, y: 34.1}
+  m_SizeDelta: {x: 187.8, y: 36.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1815201499
 MonoBehaviour:

@@ -57,12 +57,13 @@ public class UserChooseObject : MonoBehaviour {
 	}
 
 
-	void OnEnabled(){
+	void OnEnable(){
 		stateText.text = "Stato: Scegli";
 	}
 
 	void OnDisable(){
 		stateText.text = "Stato: Posiziona";
+		Debug.Log(stateText.text);
 	}
 
 	/* Choose a furniture with numbers as input key */

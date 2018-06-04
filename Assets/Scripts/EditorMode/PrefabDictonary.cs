@@ -120,10 +120,10 @@ public class PrefabDictonary : ScriptableObject {
             file.Close();
 
             foreach(Entity en in entities){
-                Debug.Log(en.prefabName);
                 GameObject currObj = Object.Instantiate(Resources.Load("EditorPrefabs/" + en.prefabName), en.position, en.rotation) as GameObject;
                 currObj.GetComponent<DictonaryEntity>().AddEntity(en.prefabName, en.position, en.rotation);
                 freezeObject(currObj);
+                currObj.GetComponent<MeshRenderer>().material = currObj.GetComponent<ModifyObject>().DefaultMaterial;
             }
         }
     }

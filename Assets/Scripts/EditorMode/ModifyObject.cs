@@ -14,7 +14,10 @@ public class ModifyObject : MonoBehaviour {
 	public Material feasibleMat;
 	public Material unfeasibleMat;
 
-	private Material defaultMat; 
+	private Material defaultMat;
+	public Material DefaultMaterial {
+		get { return defaultMat; }
+	}
 
 	/* Handle Collision with other Interactible Objects */
 	private bool isColliding = false;
