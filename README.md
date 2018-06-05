@@ -14,7 +14,7 @@ Giulio Auriemma mi aiuta :camel:
 
 ## Editor Mode
 
-### In caso i prefab perdessero i riferimenti agli scripts
+### In caso qualcuno perdesse i riferimenti agli scripts
 
 * Prefabs
   - [X] DictionaryEntity.cs;
