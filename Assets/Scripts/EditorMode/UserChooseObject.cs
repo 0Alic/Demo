@@ -52,13 +52,12 @@ public class UserChooseObject : MonoBehaviour {
 
 			GameObject obj = hit.transform.gameObject;
 
-			if(Deselect != null) Deselect(); // Call Deselect event
+			if(Deselect != null) Deselect(); // Call Deselect event: otherwise if objects overlap they all stay blue
 			if(Select != null) Select(obj); // Call Select event
 
-			if(Input.GetKeyDown("w")) {
+			if(Input.GetKeyDown("q")) {
 
 				placingScript.setObject(obj, obj.name);
-				obj.GetComponent<Interactible>().RemoveSelectionEvent();
 
 				// Update status: switch working scripts
 				this.enabled = false;
@@ -73,6 +72,7 @@ public class UserChooseObject : MonoBehaviour {
 
 	void OnEnable(){
 		stateText.text = "Stato: Scegli";
+		objToPlace = null;
 	}
 
 	void OnDisable(){

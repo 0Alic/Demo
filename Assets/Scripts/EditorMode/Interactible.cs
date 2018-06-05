@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Interactible : MonoBehaviour {
 
-	// Store the wall I am colliding with
+	// Store the walls I am colliding with
 	private HashSet<GameObject> wallCollisionList = new HashSet<GameObject>();
 	public Material selectedMaterial;
 	public Material defaultMaterial;
@@ -43,7 +43,9 @@ public class Interactible : MonoBehaviour {
 		}		
 	}
 
+	// Event's delegates
 	void selectColor(GameObject obj){
+		// Am I the selected object?
 		if(obj != null && GameObject.ReferenceEquals(obj, this.gameObject))
 			GetComponent<MeshRenderer>().material = selectedMaterial;
 	}
@@ -52,6 +54,7 @@ public class Interactible : MonoBehaviour {
 		GetComponent<MeshRenderer>().material = defaultMaterial;
 	}
 
+	// Subscribe / Unsubscribe delegates
 	public void AddSelectionEvent(){
 		UserChooseObject.Select += selectColor;
 		UserChooseObject.Deselect += defaultColor;
@@ -60,5 +63,10 @@ public class Interactible : MonoBehaviour {
 	public void RemoveSelectionEvent() {
 		UserChooseObject.Select -= selectColor;
 		UserChooseObject.Deselect -= defaultColor;
+	}
+
+	public void OnDestroy() {
+
+		RemoveSelectionEvent();
 	}
 }

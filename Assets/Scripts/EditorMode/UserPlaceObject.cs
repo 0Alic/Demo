@@ -20,6 +20,7 @@ public class UserPlaceObject : MonoBehaviour {
 	void Start() {
 		roomMask = LayerMask.GetMask("RoomLayer");
 	}
+
 	void Update () {
 		// If I have chosen an obj and I need to place it
 
@@ -52,7 +53,7 @@ public class UserPlaceObject : MonoBehaviour {
 		}
 
 		if(Input.GetButtonDown("Fire1")) {
-			// Left mouse button
+			// Left mouse button, place the object
 
 			if(!modifyObjScript.IsColliding){
 
@@ -81,12 +82,14 @@ public class UserPlaceObject : MonoBehaviour {
 
 		if(Input.GetKeyDown(KeyCode.Backspace)){
 			// Delete the object
+			
 			DictonaryEntity objEntity = objToPlace.GetComponent<DictonaryEntity>();
 			if(objEntity.ID != -1){
 				// The object was previuosly stored, delete the entry at the dictionary
 				objEntity.RemoveEntity(objEntity.ID);
 			}
 
+			objToPlace.GetComponent<Interactible>().RemoveSelectionEvent();	// Unsubscribe to changing color events
 			Destroy(objToPlace);
 			switchMode();
 		}	

@@ -1122,8 +1122,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -114.8, y: -121.2}
-  m_SizeDelta: {x: 209, y: 223.7}
+  m_AnchoredPosition: {x: -114.8, y: -139.2}
+  m_SizeDelta: {x: 209, y: 261.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1007142767
 MonoBehaviour:
@@ -1157,9 +1157,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "(Scegli)\n\n1) Tavolo\n2) Lampada a muro\n3) Comodino\n4) Quadro\n\nW)
+  m_Text: "(Scegli)\n\n1) Tavolo\n2) Lampada a muro\n3) Comodino\n4) Quadro\n\nQ)
     Modifica oggetto selezionato\n\n(Posiziona)\n\nMouse Sx) Piazza\nMouse Dx) Ruota
-    90\xB0"
+    90\xB0\n\nBackSpace) Delete Object"
 --- !u!222 &1007142768
 CanvasRenderer:
   m_ObjectHideFlags: 0
