@@ -37,3 +37,6 @@ Giulio Auriemma mi aiuta :camel:
   - [X] MenuScript.cs, attach defaultCamera.transform
     - [X] MenuButtonScript.cs;
     - Associa ai Trigger Component i metodi di menuButtonScript onEnter, onExit e press al Button Component
+    
+Piccoli appunti per me del futuro:
+magari crea un prefab VRMenuButton con tutti i Component messi fatti stasera anziché fare gli stessi passi tutte le volte.
