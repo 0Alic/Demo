@@ -9,6 +9,8 @@ public class UserChooseObject : MonoBehaviour {
 	public delegate void DeselectAction();
 	public static event SelectAction select;
 	public static event DeselectAction deselect;
+	public static event SelectAction menuSelect;
+	public static event DeselectAction menuDeselect;
 
 	// UI
 	public Text stateText;
@@ -19,6 +21,7 @@ public class UserChooseObject : MonoBehaviour {
 
 	// Mask
 	int furnitureMask;
+	int UImask;
 
 	// Placing script reference
 	UserPlaceObject placingScript;
@@ -29,6 +32,7 @@ public class UserChooseObject : MonoBehaviour {
 
 	void Start() {
 		furnitureMask = LayerMask.GetMask("FurnitureLayer");
+		UImask = LayerMask.GetMask("UI");
 	}
 
 	void Update () {
@@ -67,6 +71,16 @@ public class UserChooseObject : MonoBehaviour {
 		else {
 			if(deselect != null) deselect(); // Call Deselect event
 		}
+/* 
+		if(Physics.Raycast(ray, out hit, 1000f, UImask)) {
+ 
+			GameObject obj = hit.transform.gameObject;
+			
+			if(menuSelect != null) menuSelect(obj);
+
+			// check user "fire1" input
+		}
+*/
 	}
 
 
