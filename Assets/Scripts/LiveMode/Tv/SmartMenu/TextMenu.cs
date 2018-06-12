@@ -23,12 +23,9 @@ public class TextMenu : Menu {
         // Init infos.
         MeshFilter fatherMesh = father.GetComponent<MeshFilter>();
         menuInfo.itemsPerTab = itemsPerTab;
-        menuInfo.width = fatherMesh.mesh.bounds.size.x * father.transform.localScale.x;
-        menuInfo.height = (fatherMesh.mesh.bounds.size.y * father.transform.localScale.y) / itemsPerTab;
-        menuInfo.start = father.transform.position + 
-                        new Vector3( 0.0f, 
-                                    ((fatherMesh.mesh.bounds.size.y * father.transform.localScale.y) / 2) - menuInfo.height / 2, 
-                                    -(fatherMesh.mesh.bounds.size.z * father.transform.localScale.z) / 2 - 0.01f);
+        menuInfo.width = 1;
+        menuInfo.height = 1.0f / itemsPerTab;
+        menuInfo.start = new Vector3( 0, 0.5f - menuInfo.height, - 0.02f);
     }
 
     public override void SetSelected(string item){
@@ -60,14 +57,20 @@ public class TextMenu : Menu {
             if(tab == null){
                 tab = (new GameObject()).transform;
                 tab.gameObject.name = "tab_" + tabIndex;
-                tab.gameObject.transform.parent = root.transform;
+                tab.gameObject.transform.SetParent(root.transform);
+                tab.transform.localPosition = Vector3.zero;
+                tab.transform.localRotation = Quaternion.identity;
+                tab.transform.localScale = new Vector3(1, 1, 1);
             }
 
             Vector3 pos = menuInfo.start - new Vector3(0, (i % menuInfo.itemsPerTab) * menuInfo.height, 0);
-            GameObject currText = GameObject.Instantiate(textBox, pos, father.transform.rotation);
+            GameObject currText = GameObject.Instantiate(textBox);
 
             // Set attributes.
-            currText.transform.SetParent(tab, false);
+            currText.transform.SetParent(tab);
+            currText.transform.localPosition = pos;
+            currText.transform.localRotation = Quaternion.identity;
+            currText.transform.localScale = new Vector3(1, 1, 1);
             currText.name = item.name;
             currText.layer = Menu.menuLayer;
             currText.GetComponent<RectTransform>().sizeDelta = new Vector2(menuInfo.width, menuInfo.height);

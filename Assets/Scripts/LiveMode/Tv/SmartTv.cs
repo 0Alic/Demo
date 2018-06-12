@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
 
-using DemoAV.common;
+using DemoAV.Common;
 using DemoAV.SmartMenu;
 
 namespace DemoAV.Live.SmarTv{
@@ -18,6 +18,12 @@ public class SmartTv : MonoBehaviour {
 	AudioSource audioSource;
 	bool backward, forward;
 	float speed, speedTime;
+	short updates;
+	
+	// Components
+	public Canvas tweetCanvas;
+	public GameObject tweetContainer;
+
 
 	void OnEnable(){
 	}
@@ -26,7 +32,7 @@ public class SmartTv : MonoBehaviour {
 	void Start () {
 		// Creates component to render video.
 		display = transform.Find("Display").gameObject;
-		display.transform.Rotate(0, 180, 0);
+		
 		RenderTexture texture = new RenderTexture(1024, 720, 24);
 		display.GetComponent<Renderer>().material.SetTexture("_MainTex", texture);
 		audioSource = display.GetComponent<AudioSource>();
@@ -40,7 +46,8 @@ public class SmartTv : MonoBehaviour {
 
 		// Cretes panel menu.
 		menuFactory = GetComponent<TvMenuFactory>();
-		apps = new List<ITvApp>{ new TvLocalStreaming(menuFactory, PlayVideo) };
+		apps = new List<ITvApp>{ new TvLocalStreaming(menuFactory, PlayVideo), 
+								 new TvTwitter(tweetCanvas, tweetContainer, display, menuFactory) };
 
 		Menu currMenu = menuFactory.CreateMenu(TvMenuFactory.Type.PANEL_MENU, "main");
 
@@ -55,7 +62,8 @@ public class SmartTv : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(backward || forward){
+		// Go forward.
+		if(forward){
 			player.playbackSpeed = speed;
 
 			// Speed up.
@@ -65,7 +73,22 @@ public class SmartTv : MonoBehaviour {
 				speedTime = 0;
 			}
 		}
-		
+		// Go backward.
+		else if(backward){
+			updates++;
+			speedTime += Time.deltaTime;
+			
+			if(updates >= 30){
+				updates = 0;
+				player.time = player.time - 0.25 * speed;
+				player.Play();
+				player.Pause();
+			}
+			if(speedTime > speedIncreaseTime && speed < maxSpeed){
+				speed *= 2;
+				speedTime = 0;
+			}
+		}
 	}
 
 	void PlayVideo(string url){
@@ -133,13 +156,15 @@ public class SmartTv : MonoBehaviour {
 	}
 
 	void StartBackward(){
-		speed = -2;
+		player.Pause();
+		speed = 2;
 		speedTime = 0;
+		updates = 0;
 		backward = true;
 	}
 
 	void EndBackward(){
-		player.playbackSpeed = 1;
+		player.Play();
 		backward = false;
 	}
 

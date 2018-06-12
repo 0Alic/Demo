@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace  DemoAV.common {
+namespace  DemoAV.Common {
 public class KeyboardHandler : MonoBehaviour {
 	public delegate void KeyCallback();
 	public enum Map{

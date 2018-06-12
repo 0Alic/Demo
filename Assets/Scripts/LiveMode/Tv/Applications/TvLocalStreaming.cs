@@ -23,20 +23,33 @@ namespace DemoAV.Live.SmarTv{
             play = playFunc;
         }
 
+        /// <summary>
+        ///     Gets the name of the current application.
+        /// </summary>
+        /// <returns> The name of the current application. </returns>
         string ITvApp.GetName(){
             return "LocalStreaming";
         }
 
+        /// <summary>
+        ///     Gets a description of the current application.
+        /// </summary>
+        /// <returns> The description of the current application. </returns>
         string ITvApp.GetDescription(){
             return "";
         }
 
+        /// <summary>
+        ///     Gets the icon representing the current application.
+        /// </summary>
+        /// <returns> The texture for the icon. </returns>
         Texture2D ITvApp.GetTexture(){
             return streamingTex;
         }
 
         /// <summary>
         ///     The function to call when the streaming function is selected.
+        ///     Create a menu with the list of the local video.
         /// </summary>
         /// <param name="name"></param>
         void ITvApp.ItemCallback(string name){

@@ -47,6 +47,12 @@ public class TvMenuFactory : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// 	Creates a new menu of the given type.
+	/// </summary>
+	/// <param name="type"> The type of the menu to create. </param>
+	/// <param name="name"> The name of the menu. </param>
+	/// <returns></returns>
 	public Menu CreateMenu(Type type, string name){
 		// Check if a menu with the same method exists.
 		if(menus.ContainsKey(name))		return null;
@@ -55,9 +61,9 @@ public class TvMenuFactory : MonoBehaviour {
 		Menu newMenu;
 		switch(type){
 			case Type.PANEL_MENU:
-				newMenu =  new PanelMenu(gameObject, panel, name); break;
+				newMenu =  new PanelMenu(transform.Find("Display").gameObject, panel, name, 3, 5); break;
 			case Type.TEXT_MENU:
-				newMenu = new TextMenu(gameObject, text, name, 15); break;
+				newMenu = new TextMenu(transform.Find("Display").gameObject, text, name, 15); break;
 			default:
 				return null;
 		}
@@ -66,15 +72,24 @@ public class TvMenuFactory : MonoBehaviour {
 		return newMenu;
 	}
 
+	/// <summary>
+	/// 	Sets a new menu as the active one, deactivating the last one.
+	/// </summary>
+	/// <param name="name"> The name of the menu to activate. </param>
 	public void SetActiveMenu(string name){
 		// If null is passed, just deactivate all the menus.
 		if(name == null){
-			activeMenuObj.SetActive(false);
-			activeMenuObj = null;
-			menuStack.Clear();
+			if(activeMenuObj != null){
+				// Add the old menu to the stack of active menu.
+				menuStack.Push(activeMenuObj.name);
+
+				// Null the active menu.
+				activeMenuObj.SetActive(false);
+				activeMenuObj = null;
+			}
 		}
 		else{
-			Transform searchedMenu = transform.Find("MenuRoot/" + name);
+			Transform searchedMenu = transform.Find("Display/MenuRoot/" + name);
 
 			// If the menu exists, show it.
 			if(searchedMenu != null){
@@ -93,9 +108,16 @@ public class TvMenuFactory : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// 	Came back to the menu shown just before the current one, if any.
+	/// 	Cames back to the menu shown just before the current one, if any.
 	/// </summary>
 	public void GoBack(){
 		SetActiveMenu(menuStack.Pop());
+	}
+
+	/// <summary>
+	/// 	Clears the stack of the menu, make calls to GoBack() pointless.
+	/// </summary>
+	public void ClearMenuStack(){
+		menuStack.Clear();
 	}
 }

@@ -32,14 +32,20 @@ public abstract class Menu {
 		if(menuRootTransform == null){
 			GameObject menuRoot = new GameObject();
 			menuRoot.name = "MenuRoot";
-			menuRoot.transform.parent = father.gameObject.transform;
+			menuRoot.transform.SetParent(father.transform);
 			menuRootTransform = menuRoot.transform;
+			menuRootTransform.localScale = new Vector3(1, 1, 1);
+			menuRootTransform.localRotation = Quaternion.identity;
+			menuRootTransform.localPosition = Vector3.zero;
 		}
 
 		// Create the menu.
 		root = new GameObject();
 		root.name = name;
-		root.transform.parent = menuRootTransform;
+		root.transform.SetParent(menuRootTransform);
+		root.transform.localScale = new Vector3(1, 1, 1);
+		root.transform.localRotation = Quaternion.identity;
+		root.transform.localPosition = Vector3.zero;
 		root.SetActive(false);
 
 		callbacks = new Dictionary<string, ItemCallback>();
