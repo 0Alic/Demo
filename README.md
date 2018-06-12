@@ -29,6 +29,11 @@ Giulio Auriemma mi aiuta :camel:
   - [X] SceneController.cs.
 * GUIController
   - [X] Creator.cs.
+  - [X] GUIController.cs, attach menuCanvas script
 * HelpCanvas
   - SaveButton: OnClick(), RunTimeOnly, **Ref**: GuiController, **Fun** Creator.SaveRoom
   - LoadButton: OnClick(), RunTimeOnly, **Ref**: GuiController, **Fun** Creator.LoadRoom
+* MenuCanvas
+  - [X] MenuScript.cs, attach defaultCamera.transform
+    - [X] MenuButtonScript.cs;
+    - Associa ai Trigger Component i metodi di menuButtonScript onEnter, onExit e press al Button Component
