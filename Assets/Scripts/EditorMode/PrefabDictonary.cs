@@ -45,10 +45,13 @@ public class PrefabDictonary : ScriptableObject {
         }
     }
 
+
+
     private string _Name = "SignoraStanza";
     
     private int currId;
     private Dictionary<int, Entity> dictionary;
+    
 	private PrefabDictonary(){
         currId = 0;
         dictionary = new Dictionary<int, Entity>();
@@ -83,6 +86,10 @@ public class PrefabDictonary : ScriptableObject {
         dictionary[id].position = position;
     }
 
+	public void UpdateRotation (int id, Quaternion rotation) {
+		dictionary[id].rotation = rotation;
+	}
+
     public void Save(){
         BinaryFormatter binary  = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/Room_" + _Name + ".dat");
@@ -95,6 +102,8 @@ public class PrefabDictonary : ScriptableObject {
 
         binary.Serialize(file, entities);
         file.Close();
+
+        Debug.Log("Saved!!");
     }
 
     public void Load(){
@@ -112,6 +121,7 @@ public class PrefabDictonary : ScriptableObject {
                 currObj.GetComponent<MeshRenderer>().material = currObj.GetComponent<Interactible>().DefaultMaterial;
             }
         }
+        Debug.Log("Loaded!!");        
     }
 
 

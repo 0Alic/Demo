@@ -56,13 +56,13 @@ public class Interactible : MonoBehaviour {
 
 	// Subscribe / Unsubscribe delegates
 	public void AddSelectionEvent(){
-		UserChooseObject.Select += selectColor;
-		UserChooseObject.Deselect += defaultColor;
+		UserChooseObject.select += selectColor;
+		UserChooseObject.deselect += defaultColor;
 	}
 
 	public void RemoveSelectionEvent() {
-		UserChooseObject.Select -= selectColor;
-		UserChooseObject.Deselect -= defaultColor;
+		UserChooseObject.select -= selectColor;
+		UserChooseObject.deselect -= defaultColor;
 	}
 
 	public void OnDestroy() {

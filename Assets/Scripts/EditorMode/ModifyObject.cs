@@ -19,7 +19,8 @@ public class ModifyObject : MonoBehaviour {
 	private HashSet<GameObject> interactibleCollisionList = new HashSet<GameObject>();
 
 	/* User modifications */
-	private float rotY = 0;
+	private float rotY;
+	private Quaternion final;
 
 
 	/* Getters & Setters */
@@ -28,10 +29,11 @@ public class ModifyObject : MonoBehaviour {
 		get { return isColliding; }
 	}
 
-	// Use this for initialization
 	void Awake () {
 
 		this.GetComponent<Renderer>().material = feasibleMat;
+		rotY = transform.rotation.y;
+		final = transform.rotation;
 	}
 	
 	void Update() {
@@ -39,8 +41,8 @@ public class ModifyObject : MonoBehaviour {
 		// Rotate the object
 		if(Input.GetButtonDown("Fire2")) {
 			rotY = (rotY + 90) % 360;
+			final = Quaternion.Euler(0, rotY, 0);
 		}
-		Quaternion final = Quaternion.Euler(0, rotY, 0);
 		transform.rotation = Quaternion.Slerp(transform.rotation, final, Time.deltaTime * 20);
 	}
 

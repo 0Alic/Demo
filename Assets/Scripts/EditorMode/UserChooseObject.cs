@@ -7,8 +7,8 @@ public class UserChooseObject : MonoBehaviour {
 
 	public delegate void SelectAction(GameObject obj);
 	public delegate void DeselectAction();
-	public static event SelectAction Select;
-	public static event DeselectAction Deselect;
+	public static event SelectAction select;
+	public static event DeselectAction deselect;
 
 	// UI
 	public Text stateText;
@@ -52,8 +52,8 @@ public class UserChooseObject : MonoBehaviour {
 
 			GameObject obj = hit.transform.gameObject;
 
-			if(Deselect != null) Deselect(); // Call Deselect event: otherwise if objects overlap they all stay blue
-			if(Select != null) Select(obj); // Call Select event
+			if(deselect != null) deselect(); // Call Deselect event: otherwise if objects overlap they all stay blue
+			if(select != null) select(obj); // Call Select event
 
 			if(Input.GetKeyDown("q")) {
 
@@ -65,7 +65,7 @@ public class UserChooseObject : MonoBehaviour {
 			}
 		}
 		else {
-			if(Deselect != null) Deselect(); // Call Deselect event
+			if(deselect != null) deselect(); // Call Deselect event
 		}
 	}
 
