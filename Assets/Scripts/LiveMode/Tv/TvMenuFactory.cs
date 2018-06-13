@@ -8,7 +8,7 @@ using DemoAV.SmartMenu;
 public class TvMenuFactory : MonoBehaviour {
 
 	static LayerMask menuMask = 1 << 9;
-	public enum Type { PANEL_MENU, TEXT_MENU };
+	public enum Type { PANEL_MENU, TEXT_MENU, SOCIAL_MENU };
 	Dictionary<string, Menu> menus = new Dictionary<string, Menu>();		// The already existents menu.
 	GameObject activeMenuObj = null;										// The menu game object currently active.
 	Menu activeMenu;														// The menu currently active.
@@ -64,6 +64,8 @@ public class TvMenuFactory : MonoBehaviour {
 				newMenu =  new PanelMenu(transform.Find("Display").gameObject, panel, name, 3, 5); break;
 			case Type.TEXT_MENU:
 				newMenu = new TextMenu(transform.Find("Display").gameObject, text, name, 15); break;
+			case Type.SOCIAL_MENU:
+				newMenu = new SocialMenu(transform.Find("Display").gameObject, text, name, 4); break;
 			default:
 				return null;
 		}
@@ -111,7 +113,21 @@ public class TvMenuFactory : MonoBehaviour {
 	/// 	Cames back to the menu shown just before the current one, if any.
 	/// </summary>
 	public void GoBack(){
-		SetActiveMenu(menuStack.Pop());
+		if(menuStack.Count != 0){
+			string name = menuStack.Pop();
+			Transform searchedMenu = transform.Find("Display/MenuRoot/" + name);
+
+			// If the menu exists, show it.
+			if(searchedMenu != null){
+				if(activeMenuObj != null){
+					activeMenuObj.SetActive(false);
+				} 		
+				
+				activeMenuObj = searchedMenu.gameObject;
+				activeMenuObj.SetActive(true);
+				menus.TryGetValue(name, out activeMenu);
+			}
+		}
 	}
 
 	/// <summary>
@@ -119,5 +135,20 @@ public class TvMenuFactory : MonoBehaviour {
 	/// </summary>
 	public void ClearMenuStack(){
 		menuStack.Clear();
+	}
+
+	/// <summary>
+	/// 	Change the current tab of the active menu.
+	/// </summary>
+	/// <param name="direction"> 0 > : go backward by the number.
+	/// 						 0 < : go backward by the module of the number.
+	/// 						 0 : go to the desidered tab.
+	/// </param>
+	/// <param name="index"> The desidered tab. </param>
+	public void ChangeTab(int direction, int index = 0){
+		if(direction == 0 )
+			activeMenu.activeTab = index;
+		else
+			activeMenu.activeTab += direction;
 	}
 }

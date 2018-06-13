@@ -7,12 +7,13 @@ public abstract class Menu {
 	// Declaration of struct and delegate.
 	public struct MenuItem{
 		public string name;
-		public string descr;
+		public object []fields;
 		public Texture2D texture;
 
-		public MenuItem(string name, string descr, Texture2D tex){
-			this.name = name; this.descr = descr;
+		public MenuItem(string name, Texture2D tex, object []fields){
+			this.name = name;
 			this.texture = tex;
+			this.fields = fields;
 		}
 	};
 	public delegate void ItemCallback(string name);
@@ -22,6 +23,7 @@ public abstract class Menu {
 	protected GameObject father,  	// The father object. It is a "concrete object" with a mesh.
 						 root;		// The empty object that is used as root for the menu.
 	private Dictionary<string, ItemCallback> callbacks;		// The dictonary that contains the callbacks.
+	private int _activeTab = 0;		// The index of the active tab.
 
 	// Base constructor.
 	protected Menu(GameObject father, string name){
@@ -49,6 +51,52 @@ public abstract class Menu {
 		root.SetActive(false);
 
 		callbacks = new Dictionary<string, ItemCallback>();
+	}
+
+	/// <summary>
+	/// 	Returns the tab with the given index.
+	/// 	If the tab doesn't exist, it creates it.
+	/// </summary>
+	/// <param name="index"> The index of the tab. </param>
+	/// <returns></returns>
+	protected GameObject GetTab(int index){
+		Transform tab = root.transform.Find("tab_" + index);
+		
+		// Create tab if it does not exist.
+		if(tab == null){
+			tab = (new GameObject()).transform;
+			tab.gameObject.name = "tab_" + index;
+			tab.gameObject.transform.SetParent(root.transform);
+            tab.transform.localPosition = Vector3.zero;
+            tab.transform.localRotation = Quaternion.identity;
+            tab.transform.localScale = new Vector3(1, 1, 1);
+
+			if(index > 0)
+				tab.gameObject.SetActive(false);
+		}
+
+		return tab.gameObject;
+	}
+
+	/// <summary>
+	/// 	The index of the current tab.
+	/// </summary>
+	/// <returns></returns>
+	public int activeTab{
+		get{
+			return _activeTab;
+		}
+		set{
+			if(value >= 0){
+				Transform tab = root.transform.Find("tab_" + value);
+
+				if(tab != null){
+					root.transform.Find("tab_" + _activeTab).gameObject.SetActive(false);
+					_activeTab = value;
+					root.transform.Find("tab_" + _activeTab).gameObject.SetActive(true);
+				}
+			}
+		}
 	}
 
 	// Methods.

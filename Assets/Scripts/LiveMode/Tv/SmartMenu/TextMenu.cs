@@ -51,18 +51,9 @@ public class TextMenu : Menu {
         if(root.transform.Find(item.name) == null){
             int i = menuInfo.count++;
 		    int tabIndex = i / menuInfo.itemsPerTab;
-            Transform tab = root.transform.Find("tab_" + tabIndex);
-		
-            // Create tab if it does not exist.
-            if(tab == null){
-                tab = (new GameObject()).transform;
-                tab.gameObject.name = "tab_" + tabIndex;
-                tab.gameObject.transform.SetParent(root.transform);
-                tab.transform.localPosition = Vector3.zero;
-                tab.transform.localRotation = Quaternion.identity;
-                tab.transform.localScale = new Vector3(1, 1, 1);
-            }
-
+            
+		    Transform tab = GetTab(tabIndex).transform;
+            
             Vector3 pos = menuInfo.start - new Vector3(0, (i % menuInfo.itemsPerTab) * menuInfo.height, 0);
             GameObject currText = GameObject.Instantiate(textBox);
 

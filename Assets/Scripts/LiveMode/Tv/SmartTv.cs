@@ -16,13 +16,9 @@ public class SmartTv : MonoBehaviour {
 	GameObject display;
 	VideoPlayer player;
 	AudioSource audioSource;
-	bool backward, forward;
+	bool backward, forward, closeVideo;
 	float speed, speedTime;
 	short updates;
-	
-	// Components
-	public Canvas tweetCanvas;
-	public GameObject tweetContainer;
 
 
 	void OnEnable(){
@@ -33,6 +29,7 @@ public class SmartTv : MonoBehaviour {
 		// Creates component to render video.
 		display = transform.Find("Display").gameObject;
 		
+		closeVideo = false;
 		RenderTexture texture = new RenderTexture(1024, 720, 24);
 		display.GetComponent<Renderer>().material.SetTexture("_MainTex", texture);
 		audioSource = display.GetComponent<AudioSource>();
@@ -47,17 +44,19 @@ public class SmartTv : MonoBehaviour {
 		// Cretes panel menu.
 		menuFactory = GetComponent<TvMenuFactory>();
 		apps = new List<ITvApp>{ new TvLocalStreaming(menuFactory, PlayVideo), 
-								 new TvTwitter(tweetCanvas, tweetContainer, display, menuFactory) };
+								 new TvTwitter(display, menuFactory) };
 
 		Menu currMenu = menuFactory.CreateMenu(TvMenuFactory.Type.PANEL_MENU, "main");
 
 		foreach(ITvApp app in apps)
-			currMenu.AddMenuItem(new Menu.MenuItem(app.GetName(), app.GetDescription(), app.GetTexture()), app.ItemCallback);
+			currMenu.AddMenuItem(new Menu.MenuItem(app.GetName(), app.GetTexture(), null), app.ItemCallback);
 
 		menuFactory.SetActiveMenu("main");
 
 		// Go back in Menu view.
 		KeyboardHandler.AddCallback(KeyboardHandler.Map.KEY_DOWN, KeyCode.Escape, menuFactory.GoBack);
+		KeyboardHandler.AddCallback(KeyboardHandler.Map.KEY_DOWN, KeyCode.D, NextTab);
+		KeyboardHandler.AddCallback(KeyboardHandler.Map.KEY_DOWN, KeyCode.A, PreviousTab);
 	}
 	
 	// Update is called once per frame
@@ -89,14 +88,43 @@ public class SmartTv : MonoBehaviour {
 				speedTime = 0;
 			}
 		}
+
+		// Stop player.
+		if(closeVideo){
+			player.Stop();
+			menuFactory.GoBack();
+			closeVideo = false;
+			
+			// Change the video callback with menu one.
+			KeyboardHandler.RemoveCallback(KeyboardHandler.Map.KEY_DOWN, KeyCode.Escape, CloseVideo);
+			KeyboardHandler.AddCallback(KeyboardHandler.Map.KEY_DOWN, KeyCode.Escape, menuFactory.GoBack);
+		}
 	}
 
+	/// <summary>
+	/// 	Goes to the previous tab in the active menu.
+	/// </summary>
+	void PreviousTab(){
+		menuFactory.ChangeTab(-1);
+	}
+
+	/// <summary>
+	/// 	Goes to the next tab in the active menu.
+	/// </summary>
+	void NextTab(){
+		menuFactory.ChangeTab(+1);
+	}
+
+	/// <summary>
+	/// 	Plays the video.
+	/// </summary>
+	/// <param name="url"> The url of the video to play. </param>
 	void PlayVideo(string url){
 		player.url = url;
 
 		// Change the menu callback with video one.
 		KeyboardHandler.RemoveCallback(KeyboardHandler.Map.KEY_DOWN, KeyCode.Escape, menuFactory.GoBack);
-		// KeyboardHandler.AddCallback(KeyboardHandler.Map.KEY_DOWN, KeyCode.Escape, menuFactory.GoBack);
+		KeyboardHandler.AddCallback(KeyboardHandler.Map.KEY_DOWN, KeyCode.Escape, CloseVideo);
 
 		// Pause video.
 		KeyboardHandler.AddCallback(KeyboardHandler.Map.KEY_DOWN, KeyCode.Space, PauseVideo);
@@ -110,6 +138,10 @@ public class SmartTv : MonoBehaviour {
 		StartCoroutine(StartVideo());
 	}
 
+	/// <summary>
+	/// 	The callback to load the video.
+	/// </summary>
+	/// <returns></returns>
 	IEnumerator StartVideo(){
 		//Assign the Audio from Video to AudioSource to be played
 		player.EnableAudioTrack(0, true);
@@ -166,6 +198,11 @@ public class SmartTv : MonoBehaviour {
 	void EndBackward(){
 		player.Play();
 		backward = false;
+	}
+	
+
+	void CloseVideo(){
+		closeVideo = true;
 	}
 
 }

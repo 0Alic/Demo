@@ -60,7 +60,7 @@ namespace DemoAV.Live.SmarTv{
 
                 foreach(string file in files){
                     if(supportedExtension.Contains(file.Substring(file.LastIndexOf(".")+1)))
-                        fileMenu.AddMenuItem(new Menu.MenuItem(Path.GetFileName(file), "", null), StartStreaming);
+                        fileMenu.AddMenuItem(new Menu.MenuItem(Path.GetFileName(file), null, null), StartStreaming);
                 }
             }
 

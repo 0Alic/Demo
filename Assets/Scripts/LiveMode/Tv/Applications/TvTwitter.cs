@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,15 +17,11 @@ namespace DemoAV.Live.SmarTv{
     using TwitterResponse = StatusesHomeTimelineResponse;
     class TvTwitter : ITvApp{
         Texture2D texture;
-        Canvas canvas;
-	    GameObject tweetsContainer;
         GameObject display;
         TvMenuFactory menuFact;
         
 
-        public TvTwitter(Canvas canvas, GameObject container, GameObject display, TvMenuFactory fact){
-            this.canvas = canvas;
-            this.tweetsContainer = container;
+        public TvTwitter( GameObject display, TvMenuFactory fact){
             this.display = display;
             this.menuFact = fact;
             this.texture = Resources.Load("Images/SmartTv/Twitter") as Texture2D;
@@ -64,71 +61,33 @@ namespace DemoAV.Live.SmarTv{
             // Deactivate menu.
             menuFact.SetActiveMenu(null);
 
-            // Append the twitter menu.
-            Canvas canvasCpy = Object.Instantiate(canvas);
-            Transform content = canvasCpy.transform.Find("Scroll View/Viewport/Content");
+            Menu tweets = menuFact.CreateMenu(TvMenuFactory.Type.SOCIAL_MENU, "TwitterMenu");
 
-            // Set position and scale of canvas container.
-            canvasCpy.transform.SetParent(display.transform);
-            canvasCpy.transform.localPosition = new Vector3(0, 0, -0.01f);
-            canvasCpy.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
+            if(tweets != null){
+                // Show twitters
+                TwitterInterface.GetTwitters(display.transform.parent.GetComponent<SmartTv>(), 20, (bool success, string response)=>{
+                    if (success) {
+                        TwitterResponse tresponse = JsonUtility.FromJson<TwitterResponse> (response);
 
-            ((RectTransform)content).offsetMin += new Vector2(2, 0); 
+                        // Print the tweets and their author.
+                        for(int i = 0; i < tresponse.items.Length; ++i){
+                            // display.transform.parent.GetComponent<SmartTv>().StartCoroutine(DownloadImage(tresponse.items[i].user.profile_background_image_url, image));
 
-            SetKeyboardBinding();
+                            string []fields = {tresponse.items[i].user.name, tresponse.items[i].text};
+                            Menu.MenuItem item = new Menu.MenuItem();
+                            item.name = "tweet" + i;
+                            item.fields = fields;
+                            tweets.AddMenuItem(item, (string nm) => {});
+                        }
 
-            // Show twitters
-            TwitterInterface.GetTwitters(display.transform.parent.GetComponent<SmartTv>(), 20, (bool success, string response)=>{
-                if (success) {
-                    TwitterResponse tresponse = JsonUtility.FromJson<TwitterResponse> (response);
-
-                    // Print the tweets and their author.
-                    for(int i = 0; i < tresponse.items.Length; ++i){
-                        GameObject tweet = Object.Instantiate(tweetsContainer);
-
-                        tweet.transform.SetParent(content, false);
-
-                        // Set author and text.
-                        TextMeshProUGUI author = tweet.transform.Find("Header/Author").GetComponent<TextMeshProUGUI>(), 
-                                        text = tweet.transform.Find("Text").GetComponent<TextMeshProUGUI>();
-                        
-                        author.text = tresponse.items[i].user.name;
-                        text.text = tresponse.items[i].text;
-
-                        // Reshape image.
-                        Image image = tweet.transform.Find("Header/Image").GetComponent<Image>();
-
-                        display.transform.parent.GetComponent<SmartTv>().StartCoroutine(DownloadImage(tresponse.items[i].user.profile_background_image_url, image));
+                        menuFact.SetActiveMenu("TwitterMenu");
+                    } else {
+                        Debug.Log (response);
                     }
-                } else {
-                    Debug.Log (response);
-                }
-            });
-        }
-
-        void SetKeyboardBinding(){
-            // Scroll down and up.
-            KeyboardHandler.KeyCallback pressS = () => {
-                GameObject.Find("Scroll View").GetComponent<ScrollRect>().verticalNormalizedPosition -= 0.005f;
-            },
-            pressW = () => {
-                GameObject.Find("Scroll View").GetComponent<ScrollRect>().verticalNormalizedPosition += 0.005f;
-            };
-
-            KeyboardHandler.AddCallback(KeyboardHandler.Map.KEY_PRESSED, KeyCode.S, pressS);
-            KeyboardHandler.AddCallback(KeyboardHandler.Map.KEY_PRESSED, KeyCode.W, pressW);
-
-            // Exit from twitter.
-            KeyboardHandler.KeyCallback escape = null;
-            escape = () => {
-                KeyboardHandler.RemoveCallback(KeyboardHandler.Map.KEY_PRESSED, KeyCode.S, pressS);
-                KeyboardHandler.RemoveCallback(KeyboardHandler.Map.KEY_PRESSED, KeyCode.W, pressW);
-                foreach (Transform child in display.transform)
-                    if(child.name.Contains("Twitter Canvas"))
-                        GameObject.Destroy(child.gameObject);
-            };
-
-            KeyboardHandler.AddCallback(KeyboardHandler.Map.KEY_DOWN, KeyCode.Escape, escape);
+                });
+            }
+            else
+                menuFact.SetActiveMenu("TwitterMenu");
         }
 
         IEnumerator DownloadImage(string url, Image img){
