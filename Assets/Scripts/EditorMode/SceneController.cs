@@ -5,12 +5,13 @@ using UnityEngine;
 public class SceneController : MonoBehaviour {
 
 	private static PrefabDictonary dictionaryInstance;
+
+
 	public static PrefabDictonary Dictionary {
 		get { return dictionaryInstance; }
 	}
 	
 	void Start () {
-		dictionaryInstance = ScriptableObject.CreateInstance<PrefabDictonary>();		
+		dictionaryInstance = ScriptableObject.CreateInstance<PrefabDictonary>();
 	}
-
 }
