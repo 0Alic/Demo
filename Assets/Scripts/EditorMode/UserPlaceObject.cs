@@ -10,8 +10,7 @@ public class UserPlaceObject : MonoBehaviour {
 	GameObject objToPlace;
 	string objName;
 	ModifyObject modifyObjScript;
-
-	LineRenderer lineRay;
+	UpdateLineRenderer lineRenderer;
 
 	int roomMask;
 	
@@ -21,7 +20,7 @@ public class UserPlaceObject : MonoBehaviour {
 	
 	void Start() {
 		roomMask = LayerMask.GetMask("RoomLayer");
-		lineRay = GameObject.Find("Mano").GetComponent<LineRenderer>();
+		lineRenderer = GameObject.Find("Mano").GetComponent<UpdateLineRenderer>();
 	}
 
 	void Update () {
@@ -30,7 +29,8 @@ public class UserPlaceObject : MonoBehaviour {
 		Vector3 size = objToPlace.GetComponent<Renderer>().bounds.size;
 		size = Vector3.Scale (size, new Vector3(0.5f, 0.5f, 0.5f));
 
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		Ray ray = new Ray(lineRenderer.GetPosition(), lineRenderer.GetForward());
+
 		RaycastHit hit;
 		bool hitSomething = Physics.Raycast(ray, out hit, 1000f, roomMask);
 

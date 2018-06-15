@@ -11,6 +11,7 @@ public class UserChooseObject : MonoBehaviour {
 	public static event DeselectAction deselect;
 	public static event SelectAction menuSelect;
 	public static event DeselectAction menuDeselect;
+	public static event SelectAction menuPress;
 
 	// UI
 	public Text stateText;
@@ -19,7 +20,8 @@ public class UserChooseObject : MonoBehaviour {
 	string prefabName = "";
 	GameObject objToPlace = null;
 
-	LineRenderer lineRay;
+
+	UpdateLineRenderer lineRenderer;
 
 	// Mask
 	int furnitureMask;
@@ -35,7 +37,7 @@ public class UserChooseObject : MonoBehaviour {
 	void Start() {
 		furnitureMask = LayerMask.GetMask("FurnitureLayer");
 		UImask = LayerMask.GetMask("UI");
-		lineRay = GameObject.Find("Mano").GetComponent<LineRenderer>();		
+		lineRenderer = GameObject.Find("Mano").GetComponent<UpdateLineRenderer>();	
 	}
 
 	void Update () {
@@ -52,7 +54,8 @@ public class UserChooseObject : MonoBehaviour {
 		}
 
 		// Check if the user wants to modify an already placed furniture
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		Ray ray = new Ray(lineRenderer.GetPosition(), lineRenderer.GetForward());
+
 		RaycastHit hit;
 		
 		if(Physics.Raycast(ray, out hit, 1000f, furnitureMask)) {
@@ -74,16 +77,23 @@ public class UserChooseObject : MonoBehaviour {
 		else {
 			if(deselect != null) deselect(); // Call Deselect event
 		}
-/* 
-		if(Physics.Raycast(ray, out hit, 1000f, UImask)) {
  
+	
+		if(Physics.Raycast(ray, out hit, 1000f, UImask)) {
+			// Check if the user hit the menu
 			GameObject obj = hit.transform.gameObject;
 			
 			if(menuSelect != null) menuSelect(obj);
 
 			// check user "fire1" input
+			if(Input.GetButtonDown("Fire1")) {
+				if(menuPress != null) menuPress(obj);
+			}
 		}
-*/
+		else {
+			if(menuDeselect != null) menuDeselect();
+		}
+
 	}
 
 

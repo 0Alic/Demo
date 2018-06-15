@@ -16,4 +16,18 @@ public class UpdateLineRenderer : MonoBehaviour {
 		lr.SetPosition(0, transform.position);
 		lr.SetPosition(1, transform.position + transform.forward*20);
 	}
+
+	public Vector3 GetForward() {
+
+		return transform.forward;
+	}
+
+	public Vector3 GetPosition() {
+		
+		return transform.position;
+	}
+
+	public LineRenderer GetRenderer() {
+		return lr;
+	}
 }
