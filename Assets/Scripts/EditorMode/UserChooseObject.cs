@@ -19,6 +19,8 @@ public class UserChooseObject : MonoBehaviour {
 	string prefabName = "";
 	GameObject objToPlace = null;
 
+	LineRenderer lineRay;
+
 	// Mask
 	int furnitureMask;
 	int UImask;
@@ -33,6 +35,7 @@ public class UserChooseObject : MonoBehaviour {
 	void Start() {
 		furnitureMask = LayerMask.GetMask("FurnitureLayer");
 		UImask = LayerMask.GetMask("UI");
+		lineRay = GameObject.Find("Mano").GetComponent<LineRenderer>();		
 	}
 
 	void Update () {

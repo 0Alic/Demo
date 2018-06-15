@@ -11,6 +11,8 @@ public class UserPlaceObject : MonoBehaviour {
 	string objName;
 	ModifyObject modifyObjScript;
 
+	LineRenderer lineRay;
+
 	int roomMask;
 	
 	void Awake () {
@@ -19,6 +21,7 @@ public class UserPlaceObject : MonoBehaviour {
 	
 	void Start() {
 		roomMask = LayerMask.GetMask("RoomLayer");
+		lineRay = GameObject.Find("Mano").GetComponent<LineRenderer>();
 	}
 
 	void Update () {
