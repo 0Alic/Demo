@@ -1,7 +1,7 @@
 # Demo
 Demo generico
 
-## Moved [here](https://github.com/VRcolVento/ChatVRoom)
+## (Closed) Now moved [here](https://github.com/VRcolVento/ChatVRoom)
 PS
 Giulio Auriemma mi aiuta :camel:
 
